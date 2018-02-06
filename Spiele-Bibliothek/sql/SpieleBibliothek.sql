@@ -2,39 +2,39 @@ create database spieleBibliothek;
 use spieleBibliothek;
 SET foreign_key_checks = 0;
 
-create table game (
-id int auto_increment not null,
-bezeichnung varchar(80) not null,
-hersteller varchar(45) not null,
-preis float not null,
-erscheinungsjahr int not null,
-genre varchar(45) not null,
-beschreibung text not null,
-cover varchar(85),
+create table Game (
+ID int auto_increment not null,
+Bezeichnung varchar(80) not null,
+Hersteller varchar(45) not null,
+Preis float not null,
+Erscheinungsjahr int not null,
+Genre varchar(45) not null,
+Beschreibung text not null,
+Cover varchar(85),
 primary key(ID)
 );
 
-create table benutzer (
-id int auto_increment not null,
-benutzername varchar(45) not null,
-passwort varchar(45) not null,
-email varchar(80) not null,
+create table Benutzer (
+ID int auto_increment not null,
+Benutzername varchar(45) not null,
+Passwort varchar(45) not null,
+Email varchar(80) not null,
 primary key(ID)
 );
 
-create table spieleliste (
-benutzer_ID int not null,
-game_ID int not null,
-Foreign Key(benutzer_ID) references benutzer(ID),
-foreign key(game_ID) references game(ID)
+create table Spieleliste (
+Benutzer_ID int not null,
+Game_ID int not null,
+Foreign Key(Benutzer_ID) references Benutzer(ID),
+foreign key(Game_ID) references Game(ID)
 );
 
-create table bewertung (
-game_ID int not null,
-benutzer_ID int not null,
-bewertung int not null,
-foreign key(game_ID) references game(ID),
-foreign key(benutzer_ID) references benutzer(ID)
+create table Bewertung (
+Game_ID int not null,
+Benutzer_ID int not null,
+Bewertung int not null,
+foreign key(Game_ID) references Game(ID),
+foreign key(Benutzer_ID) references Benutzer(ID)
 );
 
 LOAD DATA LOCAL INFILE 'D:\\Game.csv'
@@ -46,7 +46,9 @@ IGNORE 1 ROWS (Bezeichnung, Hersteller, Preis, Erscheinungsjahr, Genre, Beschrei
 
 insert into benutzer
 (Benutzername, Passwort, Email)
-Values('Admin', '1234', 'admin@help.bbcag');
+Values('Admin', '1234', 'admin@help.bbcag'),
+('Berkay', 'ChickenWings', 'Berkay.karahan@bbcag.ch'),
+('Nicola', 'BaumStamm', 'nicola.schueepp@bbcag.ch');
 
 Explain benutzer;
 

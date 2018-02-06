@@ -29,6 +29,8 @@ public class BenutzerJDBCDao implements BenutzerDao {
 				p.setId(rs.getInt("Id"));
 				p.setBenutzername(rs.getString("Benutzername"));
 				p.setPasswort(rs.getString("passwort"));
+				p.setEmail(rs.getString("email"));
+				
 				benutzer.add(p);
 			}
 			return benutzer;

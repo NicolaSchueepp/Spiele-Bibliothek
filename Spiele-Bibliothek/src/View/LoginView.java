@@ -1,4 +1,4 @@
- package View;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import Listener.LoginRegisterListener;
 
 public class LoginView extends JFrame {
 
@@ -65,6 +67,8 @@ public class LoginView extends JFrame {
 		
 		add(loginPanel, BorderLayout.CENTER);
 		add(logo, BorderLayout.NORTH);
+		
+		login.addActionListener(new LoginRegisterListener());
 	}
 	public void MainView() {
 		
