@@ -18,7 +18,7 @@ public class LoginView extends JFrame {
 	private final JTextField benutzername = new JTextField("", 20);
 	private final JTextField email = new JTextField();
 	private JPasswordField passwort = new JPasswordField("", 20);
-	private JPasswordField passwortBestätigen = new JPasswordField();
+	private JPasswordField passwortBestaetigen = new JPasswordField();
 	private JButton login = new JButton("LogIn");
 	private JButton registrieren = new JButton("Registrieren");
 	private JLabel benutzernameT = new JLabel("Benutzername:");
