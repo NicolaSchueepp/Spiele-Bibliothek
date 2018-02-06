@@ -2,6 +2,8 @@ package datenbank;
 
 import java.sql.Connection;
 
+import model.Benutzer;
+
 public class Demo {
 
 	public static void main(String[] args) {

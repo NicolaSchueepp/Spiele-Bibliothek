@@ -16,7 +16,7 @@ public class LoginRegisterListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("LogIn")) {
 			
-		}
+		} 
 	}
 	
 }

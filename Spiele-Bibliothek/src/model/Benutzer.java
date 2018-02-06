@@ -1,4 +1,4 @@
-package datenbank;
+package model;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -44,10 +44,8 @@ public class Benutzer {
 	
 	public String toString(){
 		String result = "";
-		result += id + " ";
-		result += benutzername + " ";
+		result += benutzername + "=";
 		result += passwort + " ";
-		result += email;
 		return result;
 	}
 }

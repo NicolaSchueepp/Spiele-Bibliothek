@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Benutzer;
+
 public class BenutzerJDBCDao implements BenutzerDao {
 
 	private Connection con = null;
