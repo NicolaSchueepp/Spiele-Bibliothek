@@ -1,9 +1,15 @@
-package View;
+ package View;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,8 +30,9 @@ public class LoginView extends JFrame {
 	private JLabel benutzernameT = new JLabel("Benutzername:");
 	private JLabel passwortT = new JLabel("Passwort:");
 	private JPanel southPanel = new JPanel();
-	//private ImageIcon logo = new ImageIcon("Logo.jpg");
-	//private JLabel logolabel = new JLabel(logo);
+	private JLabel logo = new JLabel(loadIcon("Logo.png"));
+	
+	
 
 	public static void main(String[] args) {
 		LoginView gui = new LoginView();
@@ -57,9 +64,20 @@ public class LoginView extends JFrame {
 		loginPanel.add(loginInputPanel);
 		
 		add(loginPanel, BorderLayout.CENTER);
-		//add(logolabel, BorderLayout.NORTH);
+		add(logo, BorderLayout.NORTH);
 	}
 	public void MainView() {
 		
+	}
+	
+	private static Icon loadIcon(String iconName) {
+		final URL resource = LoginView.class.getResource("/images/" + iconName);
+
+		if (resource == null) {
+			// TODO Replace by logger
+			System.err.println("Fehler: " + "/images/" + iconName);
+			return new ImageIcon();
+		}
+		return new ImageIcon(resource);
 	}
 }
