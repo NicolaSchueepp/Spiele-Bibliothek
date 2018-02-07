@@ -19,4 +19,8 @@ public class BenutzerController {
 	public Benutzer searchPasswortByName(String name) {
 		return BENUTZER_DAO.findPasswortByName(name);
 	}
+	
+	public void registerBenutzer(Benutzer benutzer) {
+		BENUTZER_DAO.addBenutzer(benutzer);
+	}
 }

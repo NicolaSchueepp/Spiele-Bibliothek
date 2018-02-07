@@ -26,14 +26,19 @@ public class LoginView extends JFrame {
 	protected final static JTextField benutzername = new JTextField("", 20);
 	protected static JPasswordField passwort = new JPasswordField("", 20);
 	protected static JButton login = new JButton("LogIn");
-	protected static JButton registrieren = new JButton("Registrieren");
+	protected static JButton registNow = new JButton("Jetzt Registrieren");
 	protected static JLabel benutzernameT = new JLabel("Benutzername:");
 	protected static JLabel passwortT = new JLabel("Passwort:");
 	protected JPanel southPanel = new JPanel();
 	protected JLabel logo = new JLabel(loadIcon("Logo.png"));
-	protected static JLabel fehler = new JLabel("");
+	protected static JLabel meldung = new JLabel("");
+	protected static JButton backToLogIn = new JButton("Zurück zum Log in");
+	protected static JButton registrieren = new JButton("Registrieren");
+	protected final static JTextField email = new JTextField();
+	protected static JPasswordField passwortBestaetigen = new JPasswordField();
+	protected JLabel emailT = new JLabel("E-Mail:");
+	protected JLabel passwortBestaetigenT = new JLabel("Passwort bestätigen");
 	
-
 	public static void main(String[] args) {
 		LoginView gui = new LoginView();
 		gui.setSize(1000, 1000);
@@ -41,21 +46,51 @@ public class LoginView extends JFrame {
 		gui.setResizable(false);
 		gui.setVisible(true);
 		
-		registrieren.addActionListener(new ActionListener() {
+		registNow.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("Registrieren")) {
+				if(e.getActionCommand().equals("Jetzt Registrieren")) {
 					RegistrierenView regist = new RegistrierenView();
 					regist.setSize(1000, 1000);
 					regist.pack();
 					regist.setVisible(true);
 					gui.setVisible(false);
+					meldung.setVisible(false);
 				}
 			}
 			
 		});
 		
+		//
+		registrieren.addActionListener(new ActionListener() {
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("Registrieren")) {
+					if(passwort.getText().equals(passwortBestaetigen.getText())) {
+						Benutzer b = new Benutzer();
+						b.setBenutzername(benutzername.getText());
+						b.setEmail(email.getText());
+						b.setPasswort(passwort.getText());
+						BenutzerController.getUserController().registerBenutzer(b);
+						
+						System.out.println("Registrierung abgeschlossen");
+						gui.setVisible(true);
+//						regist.setVisible(false);
+					}else {
+						meldung.setText("Passwort stimmt nicht überrein");
+						meldung.setForeground(Color.red);
+						meldung.setVisible(true);
+					}
+					
+				}
+			}
+			
+		});
+		
+		//Login
 		login.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("deprecation")
@@ -72,10 +107,23 @@ public class LoginView extends JFrame {
 						bl.setVisible(true);
 						gui.setVisible(false);
 					}else {
-						fehler.setText("Benutzername / Passwort ist ungültig!");
-						fehler.setForeground(Color.red);
-						fehler.setVisible(true);
+						meldung.setText("Benutzername / Passwort ist ungültig!");
+						meldung.setForeground(Color.red);
+						meldung.setVisible(true);
 					}
+				}
+			}
+			
+		});
+		
+		//LogIn
+		backToLogIn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getActionCommand().equals("backToLogIn")) {
+					gui.setVisible(true);
+//					regist.setVisible(false);
 				}
 			}
 			
@@ -93,7 +141,7 @@ public class LoginView extends JFrame {
 		final JPanel loginInputPanel = new JPanel(new GridLayout(0, 1));
 		loginInputPanel.add(benutzername);
 		loginInputPanel.add(passwort);
-		loginInputPanel.add(fehler);
+		loginInputPanel.add(meldung);
 		
 		final JPanel loginPanel = new JPanel();
 		loginPanel.add(loginLabelPanel);
@@ -122,7 +170,7 @@ public class LoginView extends JFrame {
       
 		southPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 		southPanel.add(login);
-		southPanel.add(registrieren);
+		southPanel.add(registNow);
 		add(southPanel, BorderLayout.SOUTH);
 		add(logo, BorderLayout.NORTH);
 	}
