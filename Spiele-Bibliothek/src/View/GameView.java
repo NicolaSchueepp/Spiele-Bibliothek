@@ -17,7 +17,7 @@ public class GameView extends JFrame {
 	private JButton warenkorb = new JButton("Warenkorb");
 	private JButton bibliothek = new JButton("Bibliothek");
 	private final JTextField search = new JTextField("search", 20);
-	protected static JLabel gameText = new JLabel("GameText", 100);
+	private JLabel gameText = new JLabel("GameText");
 
 
 	public static void main(String[] args) {
@@ -46,7 +46,11 @@ public class GameView extends JFrame {
 		panelOben.add(schaltflaeche);
 		panelOben.add(suche);
 		
+		final JPanel panelUnten = new JPanel();
+		panelUnten.add(gameText);
+		
 		add(panelOben, BorderLayout.CENTER);
+		add(panelUnten, BorderLayout.SOUTH);
 		
 		
 	}
