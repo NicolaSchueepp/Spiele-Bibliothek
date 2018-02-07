@@ -32,7 +32,6 @@ public class BibliothekView extends JFrame {
 	public static void main(String[] args) {
 		BibliothekView gui = new BibliothekView();
 		gui.setSize(1000, 1000);
-		gui.pack();
 		gui.setResizable(false);
 		gui.setVisible(true);
 	}
