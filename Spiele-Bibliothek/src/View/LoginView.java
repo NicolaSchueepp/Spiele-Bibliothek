@@ -2,16 +2,11 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -77,7 +72,7 @@ public class LoginView extends JFrame {
 						bl.setVisible(true);
 						gui.setVisible(false);
 					}else {
-						fehler.setText("Falsches Passwort");
+						fehler.setText("Benutzername / Passwort ist ungültig!");
 						fehler.setForeground(Color.red);
 						fehler.setVisible(true);
 					}

@@ -51,4 +51,37 @@ public class BenutzerJDBCDao implements BenutzerDao {
 			throw new UserNotFoundException("No user with Name "+name +" found.");
 		}		
 	}
+
+	@Override
+	public Benutzer addBenutzer(String benutzername, String passwort, String email) {
+		final String SQL = "insert into benutzer (Benutzername, Passwort, Email) Values(?, ?, ?)";
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Benutzer benutzer = null;
+		
+		try {
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, benutzername);
+			ps.setString(2, passwort);
+			ps.setString(3, email);
+			rs = ps.executeQuery();
+
+		} catch(SQLException e) {
+			throw new RuntimeException("Oh oh", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Oh oh", e);
+			}
+		}
+		return benutzer;
+	}
 }

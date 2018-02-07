@@ -2,12 +2,10 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.net.URL;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -27,6 +25,17 @@ public class RegistrierenView extends LoginView{
 		gui.pack();
 		gui.setResizable(false);
 		gui.setVisible(true);
+		
+		registrieren.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("Registrieren")) {
+					
+				}
+			}
+			
+		});
 	}
 	
 	public RegistrierenView() {
