@@ -1,11 +1,10 @@
 package model;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class Benutzer {
-	int id = 0;
-	String benutzername = "";
+	private int id = 0;
+	private String benutzername = "";
+	private String passwort = "";
+	private String email = "";
 	
 	public int getId() {
 		return id;
@@ -39,13 +38,4 @@ public class Benutzer {
 		this.email = email;
 	}
 
-	String passwort = "";
-	String email = "";
-	
-	public String toString(){
-		String result = "";
-		result += benutzername + "=";
-		result += passwort + " ";
-		return result;
-	}
 }

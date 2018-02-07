@@ -41,4 +41,10 @@ public class BenutzerJDBCDao implements BenutzerDao {
 		}
 	}
 
+	@Override
+	public Benutzer findUserByName() {
+		
+		return null;
+	}
+
 }
