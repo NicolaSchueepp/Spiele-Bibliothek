@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -20,19 +21,22 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controller.BenutzerController;
+import model.Benutzer;
+
 
 public class LoginView extends JFrame {
 
 	private static final long serialVersionUID = -7102879226099900568L;
-	protected final JTextField benutzername = new JTextField("", 20);
-	protected JPasswordField passwort = new JPasswordField("", 20);
-	protected JButton login = new JButton("LogIn");
+	protected final static JTextField benutzername = new JTextField("", 20);
+	protected static JPasswordField passwort = new JPasswordField("", 20);
+	protected static JButton login = new JButton("LogIn");
 	protected static JButton registrieren = new JButton("Registrieren");
-	protected JLabel benutzernameT = new JLabel("Benutzername:");
-	protected JLabel passwortT = new JLabel("Passwort:");
+	protected static JLabel benutzernameT = new JLabel("Benutzername:");
+	protected static JLabel passwortT = new JLabel("Passwort:");
 	protected JPanel southPanel = new JPanel();
 	protected JLabel logo = new JLabel(loadIcon("Logo.png"));
-	
+	protected static JLabel fehler = new JLabel("");
 	
 
 	public static void main(String[] args) {
@@ -56,12 +60,52 @@ public class LoginView extends JFrame {
 			}
 			
 		});
+		
+		login.addActionListener(new ActionListener() {
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("LogIn")) {
+					Benutzer benutzer = BenutzerController.getUserController().searchPasswortByName(benutzername.getText());
+					
+					if (passwort.getText().equals(benutzer.getPasswort())) {
+						GameView bl = new GameView();
+						bl.setSize(1000, 1000);
+						bl.pack();
+						// gui.setResizable(false);
+						bl.setVisible(true);
+						gui.setVisible(false);
+					}else {
+						fehler.setText("Falsches Passwort");
+						fehler.setForeground(Color.red);
+						fehler.setVisible(true);
+					}
+				}
+			}
+			
+		});
 	}
 	
 
 	public LoginView() {
 		printMainLogin();
-		printLogin();
+		final JPanel loginLabelPanel = new JPanel(new GridLayout(0, 1));
+		loginLabelPanel.add(benutzernameT);
+		loginLabelPanel.add(passwortT);
+		loginLabelPanel.add(new JLabel(""));
+		
+		final JPanel loginInputPanel = new JPanel(new GridLayout(0, 1));
+		loginInputPanel.add(benutzername);
+		loginInputPanel.add(passwort);
+		loginInputPanel.add(fehler);
+		
+		final JPanel loginPanel = new JPanel();
+		loginPanel.add(loginLabelPanel);
+		loginPanel.add(loginInputPanel);
+		
+		add(loginPanel, BorderLayout.CENTER);
+		loginPanel.setVisible(true);
 	}
 
 	
@@ -87,22 +131,6 @@ public class LoginView extends JFrame {
 		add(southPanel, BorderLayout.SOUTH);
 		add(logo, BorderLayout.NORTH);
 	}
-	
-	public void printLogin() {
-		final JPanel loginLabelPanel = new JPanel(new GridLayout(0, 1));
-		loginLabelPanel.add(benutzernameT);
-		loginLabelPanel.add(passwortT);
-		
-		final JPanel loginInputPanel = new JPanel(new GridLayout(0, 1));
-		loginInputPanel.add(benutzername);
-		loginInputPanel.add(passwort);
-		
-		final JPanel loginPanel = new JPanel();
-		loginPanel.add(loginLabelPanel);
-		loginPanel.add(loginInputPanel);
-		
-		add(loginPanel, BorderLayout.CENTER);
-		loginPanel.setVisible(true);
-	}
+
 	
 }

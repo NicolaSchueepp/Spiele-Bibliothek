@@ -1,50 +1,54 @@
 package datenbank;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
+import exception.UserNotFoundException;
 import model.Benutzer;
 
 public class BenutzerJDBCDao implements BenutzerDao {
-
-	private Connection con = null;
-
-	public BenutzerJDBCDao(Connection connection) {
-		con = connection;
-	}
-
-	public List<Benutzer> getAllBenutzer() {
-		try {
-		  List<Benutzer> benutzer = new ArrayList<Benutzer>();
-			Benutzer p = null;
-			String sql = "SELECT * from benutzer";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			
-			while (rs.next()) {
-				p = new Benutzer();
-				p.setId(rs.getInt("Id"));
-				p.setBenutzername(rs.getString("Benutzername"));
-				p.setPasswort(rs.getString("passwort"));
-				p.setEmail(rs.getString("email"));
-				
-				benutzer.add(p);
-			}
-			return benutzer;
-		} catch (SQLException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
+	
+	private final Connection con = ConnectionFactory.getInstance().getConnection();
 
 	@Override
-	public Benutzer findUserByName() {
+	public Benutzer findPasswortByName(String name) {
+		final String SQL = "select passwort from benutzer where benutzername = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Benutzer benutzer = null;
 		
-		return null;
+		try {
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				benutzer = new Benutzer();
+				benutzer.setPasswort(rs.getString("passwort"));
+				break;
+			}
+		} catch(SQLException e) {
+			throw new RuntimeException("Oh oh", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Oh oh", e);
+			}
+		}
+		
+		if (benutzer != null) {
+			return benutzer;
+		}else {
+			throw new UserNotFoundException("No user with Name "+name +" found.");
+		}		
 	}
-
 }

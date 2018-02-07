@@ -16,7 +16,7 @@ public class GameView extends JFrame {
 	private JButton warenkorb = new JButton("Warenkorb");
 	private JButton bibliothek = new JButton("Bibliothek");
 	private final JTextField search = new JTextField("search", 20);
-	private final JTextField search = new JTextField("search", 20);
+
 
 	public static void main(String[] args) {
 		GameView gui = new GameView();

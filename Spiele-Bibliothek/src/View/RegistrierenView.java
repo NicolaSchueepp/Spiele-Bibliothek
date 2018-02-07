@@ -19,6 +19,7 @@ public class RegistrierenView extends LoginView{
 	private JPasswordField passwortBestaetigen = new JPasswordField();
 	private JLabel emailT = new JLabel("E-Mail:");
 	private JLabel passwortBestaetigenT = new JLabel("Passwort bestätigen");
+	private JButton backToLogIn = new JButton("s");
 	
 	public static void main(String[] args) {
 		RegistrierenView gui = new RegistrierenView();
@@ -32,7 +33,16 @@ public class RegistrierenView extends LoginView{
 		this.printMainLogin();
 		printRegistrieren();
 	}
-
+	
+	public void printMainLogin() {
+		setTitle("Login");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+      
+		southPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+		southPanel.add(registrieren);
+		add(southPanel, BorderLayout.SOUTH);
+		add(logo, BorderLayout.NORTH);
+	}
 	
 	public void printRegistrieren() {
 		final JPanel registrierenLabelPanel = new JPanel(new GridLayout(0, 1));
