@@ -74,47 +74,10 @@ public class LoginView extends JFrame {
 					RegistrierenView regist = new RegistrierenView();
 					regist.setSize(1000, 1000);
 					regist.pack();
+					regist.setResizable(false);
 					regist.setVisible(true);
-					gui.setVisible(false);
 					meldung.setVisible(false);
-				}
-			}
-
-		});
-
-		// Registrieren
-		registrieren.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("deprecation")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (e.getActionCommand().equals("Registrieren")) {
-
-					if (email.getText().length() < 5) {
-						meldung.setText("Invalide Email Adresse!");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
-
-					} else if (benutzername.getText().length() < 7) {
-						meldung.setText("Benutzername zu kurz!");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
-
-					} else if (!passwort.getText().equals(passwortBestaetigen.getText()) && passwort.getText().length() > 4) {
-						meldung.setText("Passwörter stimmen nicht überein!");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
-					} else {
-						Benutzer b = new Benutzer();
-						b.setBenutzername(benutzername.getText());
-						b.setEmail(email.getText());
-						b.setPasswort(passwort.getText());
-						BenutzerController.getUserController().registerBenutzer(b);
-
-						System.out.println("Registrierung abgeschlossen");
-						gui.setVisible(true);
-					}
-
+					setVisible(false);
 				}
 			}
 
@@ -133,27 +96,15 @@ public class LoginView extends JFrame {
 						GameView bl = new GameView();
 						bl.setSize(1000, 1000);
 						bl.pack();
-						// gui.setResizable(false);
+						bl.setResizable(false);
 						bl.setVisible(true);
-						gui.setVisible(false);
+						meldung.setVisible(false);
+						setVisible(false);
 					} else {
 						meldung.setText("Benutzername / Passwort ist ungültig!");
 						meldung.setForeground(Color.red);
 						meldung.setVisible(true);
 					}
-				}
-			}
-
-		});
-
-		// backtoLogIn
-		backToLogIn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (e.getActionCommand().equals("backToLogIn")) {
-					gui.setVisible(true);
-					// regist.setVisible(false);
 				}
 			}
 

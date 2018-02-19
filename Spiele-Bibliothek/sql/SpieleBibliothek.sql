@@ -46,11 +46,10 @@ IGNORE 1 ROWS (Bezeichnung, Hersteller, Preis, Erscheinungsjahr, Genre, Beschrei
 
 insert into benutzer
 (Benutzername, Passwort, Email)
-Values('Admin', '1234', 'admin@help.bbcag'),
-('Berkay', 'ChickenWings', 'Berkay.karahan@bbcag.ch'),
-('Nicola', 'BaumStamm', 'nicola.schueepp@bbcag.ch');
+Values('Admin', '1234', 'admin@help.bbcag');
+
 
 Explain benutzer;
-
+delete from benutzer;
 Select * from Game;
 Select * from benutzer;
