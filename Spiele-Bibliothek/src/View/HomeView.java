@@ -43,12 +43,21 @@ public class HomeView extends JFrame {
 		buttonNavigation.add(warenkorbButton);
 		buttonNavigation.add(bibliothekButton);
 		
-		final JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		searchPanel.add(searchField);
+		final JPanel buttonNavigation2 = new JPanel(new FlowLayout(FlowLayout.LEFT,50,50));
+		buttonNavigation2.add(buttonNavigation);
 		
-		northPanel.add(buttonNavigation);
+		final JPanel northSearchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		northSearchPanel.add(searchIcon);
+		northSearchPanel.add(searchField);
+		
+		final JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,50));
+		searchPanel.add(northSearchPanel);
+	
+		northPanel.add(buttonNavigation2);
 		northPanel.add(searchPanel);
 		add(northPanel, BorderLayout.NORTH);
+		
+		
 	}
 	
 	public static Icon loadIcon(String iconName) {
