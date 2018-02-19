@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 import Controller.BenutzerController;
 import model.Benutzer;
 
-
 public class LoginView extends JFrame {
 
 	private static final long serialVersionUID = -7102879226099900568L;
@@ -38,7 +37,7 @@ public class LoginView extends JFrame {
 	protected static JPasswordField passwortBestaetigen = new JPasswordField();
 	protected JLabel emailT = new JLabel("E-Mail:");
 	protected JLabel passwortBestaetigenT = new JLabel("Passwort bestätigen");
-	
+
 	public static void main(String[] args) {
 		LoginView gui = new LoginView();
 		gui.setSize(1000, 1000);
@@ -46,6 +45,7 @@ public class LoginView extends JFrame {
 		gui.setResizable(false);
 		gui.setVisible(true);
 		
+		//Jetzt Registrieren
 		registNow.addActionListener(new ActionListener() {
 
 			@Override
@@ -62,14 +62,29 @@ public class LoginView extends JFrame {
 			
 		});
 		
-		//
+		//Registrieren
 		registrieren.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("Registrieren")) {
-					if(passwort.getText().equals(passwortBestaetigen.getText())) {
+					
+					if(email.getText().length()<5) {
+						meldung.setText("Invalide Email Adresse!");
+						meldung.setForeground(Color.red);
+						meldung.setVisible(true);
+						
+					}else if(benutzername.getText().length() < 7) {
+						meldung.setText("Benutzername zu kurz!");
+						meldung.setForeground(Color.red);
+						meldung.setVisible(true);
+						
+					}else if(!passwort.getText().equals(passwortBestaetigen.getText()) && passwort.getText().length()>4){
+						meldung.setText("Passwörter stimmen nicht überein!");
+						meldung.setForeground(Color.red);
+						meldung.setVisible(true);
+					}else {
 						Benutzer b = new Benutzer();
 						b.setBenutzername(benutzername.getText());
 						b.setEmail(email.getText());
@@ -78,11 +93,6 @@ public class LoginView extends JFrame {
 						
 						System.out.println("Registrierung abgeschlossen");
 						gui.setVisible(true);
-//						regist.setVisible(false);
-					}else {
-						meldung.setText("Passwort stimmt nicht überrein");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
 					}
 					
 				}
@@ -93,7 +103,7 @@ public class LoginView extends JFrame {
 		//Login
 		login.addActionListener(new ActionListener() {
 
-			@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("LogIn")) {
@@ -116,7 +126,7 @@ public class LoginView extends JFrame {
 			
 		});
 		
-		//LogIn
+		//backtoLogIn
 		backToLogIn.addActionListener(new ActionListener() {
 
 			@Override
@@ -129,7 +139,6 @@ public class LoginView extends JFrame {
 			
 		});
 	}
-	
 
 	public LoginView() {
 		printMainLogin();
@@ -137,21 +146,20 @@ public class LoginView extends JFrame {
 		loginLabelPanel.add(benutzernameT);
 		loginLabelPanel.add(passwortT);
 		loginLabelPanel.add(new JLabel(""));
-		
+
 		final JPanel loginInputPanel = new JPanel(new GridLayout(0, 1));
 		loginInputPanel.add(benutzername);
 		loginInputPanel.add(passwort);
 		loginInputPanel.add(meldung);
-		
+
 		final JPanel loginPanel = new JPanel();
 		loginPanel.add(loginLabelPanel);
 		loginPanel.add(loginInputPanel);
-		
+
 		add(loginPanel, BorderLayout.CENTER);
 		loginPanel.setVisible(true);
 	}
 
-	
 	public static Icon loadIcon(String iconName) {
 		final URL resource = LoginView.class.getResource("/images/" + iconName);
 
@@ -161,13 +169,11 @@ public class LoginView extends JFrame {
 		}
 		return new ImageIcon(resource);
 	}
-	
-	
-	
+
 	public void printMainLogin() {
 		setTitle("Login");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-      
+
 		southPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 		southPanel.add(login);
 		southPanel.add(registNow);
@@ -175,5 +181,4 @@ public class LoginView extends JFrame {
 		add(logo, BorderLayout.NORTH);
 	}
 
-	
 }

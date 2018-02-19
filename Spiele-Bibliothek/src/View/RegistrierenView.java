@@ -26,36 +26,43 @@ public class RegistrierenView extends LoginView{
 		gui.setResizable(false);
 		gui.setVisible(true);
 		
-		registrieren.addActionListener(new ActionListener() {
+		//Registrieren
+				registrieren.addActionListener(new ActionListener() {
 
-			@SuppressWarnings("deprecation")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("Registrieren")) {
-					if(passwort.getText().equals(passwortBestaetigen.getText())) {
-						Benutzer b = new Benutzer();
-						b.setBenutzername(benutzername.getText());
-						b.setEmail(email.getText());
-						b.setPasswort(passwort.getText());
-						BenutzerController.getUserController().registerBenutzer(b);
-						
-						System.out.println("Registrierung abgeschlossen");
-						LoginView loginSicht = new LoginView();
-						loginSicht.setSize(1000, 1000);
-						loginSicht.pack();
-						loginSicht.setResizable(false);
-						loginSicht.setVisible(true);
-						gui.setVisible(false);
-					}else {
-						meldung.setText("Passwort stimmt nicht überrein");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
+					@SuppressWarnings("deprecation")
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if(e.getActionCommand().equals("Registrieren")) {
+							
+							if(email.getText().contains("*@*.*")) {
+								meldung.setText("Invalide Email Adresse!");
+								meldung.setForeground(Color.red);
+								meldung.setVisible(true);
+								
+							}else if(benutzername.getText().length() < 7) {
+								meldung.setText("Benutzername muss mehr als 6 Zeichen haben!");
+								meldung.setForeground(Color.red);
+								meldung.setVisible(true);
+								
+							}else if(!passwort.getText().equals(passwortBestaetigen.getText()) && passwort.getText().length()>4){
+								meldung.setText("Passwort Stimmt nicht überein!");
+								meldung.setForeground(Color.red);
+								meldung.setVisible(true);
+							}else {
+								Benutzer b = new Benutzer();
+								b.setBenutzername(benutzername.getText());
+								b.setEmail(email.getText());
+								b.setPasswort(passwort.getText());
+								BenutzerController.getUserController().registerBenutzer(b);
+								
+								System.out.println("Registrierung abgeschlossen");
+								gui.setVisible(true);
+							}
+							
+						}
 					}
 					
-				}
-			}
-			
-		});
+				});
 		
 		login.addActionListener(new ActionListener() {
 
