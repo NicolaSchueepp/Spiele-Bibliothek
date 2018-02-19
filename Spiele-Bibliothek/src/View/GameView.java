@@ -57,7 +57,7 @@ public class GameView extends JFrame {
 		
 		final JPanel panelMitte = new JPanel();
 		panelMitte.add(gameText);
-		panelMitte.add(video);
+//		panelMitte.add(video);
 		
 		final JPanel inDenWarenkorb = new JPanel(new GridLayout(1, 1));
 		inDenWarenkorb.add(inWarenkorb);
