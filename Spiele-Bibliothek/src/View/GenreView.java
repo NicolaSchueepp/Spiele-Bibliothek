@@ -1,22 +1,22 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BibliothekView extends JFrame {
+import Controller.BenutzerController;
+
+public class GenreView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	protected static JButton home = new JButton("Home");
@@ -24,16 +24,12 @@ public class BibliothekView extends JFrame {
 	protected static JButton warenkorb = new JButton("Warenkorb");
 	protected static JButton bibliothek = new JButton("Bibliothek");
 	private final JTextField search = new JTextField("search", 20);
-	private JButton download = new JButton("Download");
-	private JButton download2 = new JButton("Download");
-	private JLabel logo = new JLabel(loadIcon("Logo.png"));
-	private JLabel assasinsCreed = new JLabel(loadIcon("Assassin’s-Creed-Origins.jpg"));
-	private JLabel assasinsCreedText = new JLabel("TEXT");
-	private JLabel logoText = new JLabel("TEXT2");
+	JComboBox<Object> genreBox;
 
 	public static void main(String[] args) {
-		BibliothekView gui = new BibliothekView();
+		GenreView gui = new GenreView();
 		gui.setSize(1000, 1000);
+		gui.pack();
 		gui.setResizable(false);
 		gui.setVisible(true);
 		
@@ -70,16 +66,16 @@ public class BibliothekView extends JFrame {
 		});
 		
 		
-//		Genre
-		genre.addActionListener(new ActionListener() {
+//		Bibliothek
+		bibliothek.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("Genre")) {
-					GenreView genre = new GenreView();
-					genre.setSize(1000, 1000);
-					genre.pack();
-					genre.setVisible(true);
+				if(e.getActionCommand().equals("Bibliothek")) {
+					BibliothekView bibliothek = new BibliothekView();
+					bibliothek.setSize(1000, 1000);
+					bibliothek.pack();
+					bibliothek.setVisible(true);
 					gui.setVisible(false);
 				}
 			}
@@ -87,10 +83,12 @@ public class BibliothekView extends JFrame {
 		});
 		
 	}
-
-	public BibliothekView() {
-		setTitle("Bibliothek");
+	
+	public GenreView() {
+		setTitle("Genre");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		genreBox = new JComboBox<Object>(new Object[] {"Action", "Adventure", "Ego Shooter", "Gesellschaft", "Rollenspiel", "Simulation", "Sport"});
 		
 		final JPanel schaltflaeche = new JPanel(new GridLayout(1, 4));
 		schaltflaeche.add(home);
@@ -104,30 +102,15 @@ public class BibliothekView extends JFrame {
 		final JPanel panelOben = new JPanel();
 		panelOben.add(schaltflaeche);
 		panelOben.add(suche);
-
 		
-		final JPanel gameView = new JPanel(new GridLayout(3, 1));
-		gameView.add(logo);
-		gameView.add(assasinsCreed);
-		gameView.add(logoText);
-		gameView.add(assasinsCreedText);
-		gameView.add(download);
-		gameView.add(download2);
+		final JPanel bewertung = new JPanel(new GridLayout(1, 2));
+		bewertung.add(genreBox);
 		
+		final JPanel panelMitte = new JPanel();
+		panelMitte.add(bewertung);
 		
-		add(panelOben, BorderLayout.CENTER);
-		add(gameView, BorderLayout.SOUTH);
+		add(panelOben, BorderLayout.NORTH);
+		add(panelMitte, BorderLayout.CENTER);
 	}
-		
-		
-	private static Icon loadIcon(String iconName) {
-		final URL resource = LoginView.class.getResource("/images/" + iconName);
 
-		if (resource == null) {
-			// TODO Replace by logger
-			System.err.println("Fehler: " + "/images/" + iconName);
-			return new ImageIcon();
-		}
-		return new ImageIcon(resource);	
-	}
 }
