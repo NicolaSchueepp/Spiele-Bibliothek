@@ -20,6 +20,7 @@ public class GameView extends JFrame {
 	private JButton bibliothek = new JButton("Bibliothek");
 	private final JTextField search = new JTextField("search", 20);
 	private JLabel gameText = new JLabel("GameText");
+	protected static JLabel video = new JLabel("Video");
 	private JButton inWarenkorb = new JButton("In den Warenkorb");
 	private JButton bewerten = new JButton("Bewertung senden");
 	JFrame sterne = new JFrame("");
@@ -29,8 +30,7 @@ public class GameView extends JFrame {
 	
 	public static void main(String[] args) {
 		GameView gui = new GameView();
-		gui.setSize(1000, 1000);
-		gui.pack();
+		gui.setSize(1500, 900);
 		gui.setResizable(false);
 		gui.setVisible(true);
 
@@ -42,7 +42,7 @@ public class GameView extends JFrame {
 		
 		combobox = new JComboBox(new Object[] {"1", "2", "3", "4", "5"});
 		
-		final JPanel schaltflaeche = new JPanel(new GridLayout(1, 4));
+		final JPanel schaltflaeche = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		schaltflaeche.add(home);
 		schaltflaeche.add(genre);
 		schaltflaeche.add(warenkorb);
@@ -55,9 +55,11 @@ public class GameView extends JFrame {
 		panelOben.add(schaltflaeche);
 		panelOben.add(suche);
 		
-		final JPanel panelMitte = new JPanel();
-		panelMitte.add(gameText);
-//		panelMitte.add(video);
+		final JPanel panelMitteLinks = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panelMitteLinks.add(gameText);
+		
+		final JPanel panelMitteRechts = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		panelMitteRechts.add(video);
 		
 		final JPanel inDenWarenkorb = new JPanel(new GridLayout(1, 1));
 		inDenWarenkorb.add(inWarenkorb);
@@ -73,7 +75,8 @@ public class GameView extends JFrame {
 		
 		
 		add(panelOben, BorderLayout.NORTH);
-		add(panelMitte, BorderLayout.CENTER);
+		add(panelMitteLinks, BorderLayout.CENTER);
+		add(panelMitteRechts, BorderLayout.CENTER);
 		add(panelUnten, BorderLayout.SOUTH);
 		
 	}
