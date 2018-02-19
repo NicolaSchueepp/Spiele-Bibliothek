@@ -2,19 +2,10 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class BibliothekView extends HomeView {
 
@@ -22,7 +13,7 @@ public class BibliothekView extends HomeView {
 	private JButton download = new JButton("Download");
 	private JButton download2 = new JButton("Download");
 	private JLabel logo = new JLabel(loadIcon("Logo.png"));
-	private JLabel assasinsCreed = new JLabel(loadIcon("Assassin’s-Creed-Origins.jpg"));
+	private JLabel assasinsCreed = new JLabel(loadIcon("assassinsCreedOrigins.jpg"));
 	private JLabel assasinsCreedText = new JLabel("TEXT");
 	private JLabel logoText = new JLabel("TEXT2");
 
@@ -45,5 +36,7 @@ public class BibliothekView extends HomeView {
 		gameView.add(download2);
 		
 		add(gameView, BorderLayout.SOUTH);
+		
+		
 	}
 }

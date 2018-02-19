@@ -70,18 +70,16 @@ public class LoginView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getActionCommand().equals("Jetzt Registrieren")) {
-					RegistrierenView regist = new RegistrierenView();
-					regist.setSize(1000, 1000);
-					regist.pack();
-					regist.setResizable(false);
-					regist.setVisible(true);
-					meldung.setVisible(false);
-					setVisible(false);
-				}
+				RegistrierenView regist = new RegistrierenView();
+				regist.setSize(1000, 1000);
+				regist.pack();
+				regist.setResizable(false);
+				regist.setVisible(true);
+				meldung.setVisible(false);
+				setVisible(false);
 			}
-
 		});
+
 
 		// Login
 		login.addActionListener(new ActionListener() {
@@ -89,22 +87,18 @@ public class LoginView extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getActionCommand().equals("LogIn")) {
-					Benutzer benutzer = BenutzerController.getUserController().searchPasswortByName(benutzername.getText());
-
-					if (passwort.getText().equals(benutzer.getPasswort())) {
-						GameView bl = new GameView();
-						bl.setSize(1000, 1000);
-						bl.pack();
-						bl.setResizable(false);
-						bl.setVisible(true);
-						meldung.setVisible(false);
-						setVisible(false);
-					} else {
-						meldung.setText("Benutzername / Passwort ist ungueltig!");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
-					}
+				Benutzer benutzer = BenutzerController.getUserController().searchPasswortByName(benutzername.getText());
+				if (passwort.getText().equals(benutzer.getPasswort())) {
+					HomeView homeview = new HomeView();
+					homeview.setSize(1500, 900);
+					homeview.setResizable(false);
+					homeview.setVisible(true);
+					meldung.setVisible(false);
+					setVisible(false);
+				} else {
+					meldung.setText("Benutzername / Passwort ist ungueltig!");
+					meldung.setForeground(Color.red);
+					meldung.setVisible(true);
 				}
 			}
 

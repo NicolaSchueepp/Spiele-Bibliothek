@@ -32,37 +32,32 @@ public class RegistrierenView extends LoginView {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getActionCommand().equals("Registrieren")) {
-					if (email.getText().length() < 5) {
-						meldung.setText("Invalide Email Adresse!");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
-
-					} else if (benutzername.getText().length() < 7) {
-						meldung.setText("Benutzername zu kurz!");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
-
-					} else if (!passwort.getText().equals(passwortBestaetigen.getText()) && passwort.getText().length() > 4) {
-						meldung.setText("Passwoerter stimmen nicht überein!");
-						meldung.setForeground(Color.red);
-						meldung.setVisible(true);
-					} else {
-						Benutzer b = new Benutzer();
-						b.setBenutzername(benutzername.getText());
-						b.setEmail(email.getText());
-						b.setPasswort(passwort.getText());
-						BenutzerController.getUserController().registerBenutzer(b);
-						System.out.println("Benutzer Registriert!!!");
-						LoginView loginview = new LoginView();
-						loginview.setSize(1000, 1000);
-						loginview.pack();
-						loginview.setResizable(false);
-						loginview.setVisible(true);
-						meldung.setVisible(false);
-						setVisible(false);
-					}
-
+				if (email.getText().length() < 5) {
+					meldung.setText("Invalide Email Adresse!");
+					meldung.setForeground(Color.red);
+					meldung.setVisible(true);
+				} else if (benutzername.getText().length() < 7) {
+					meldung.setText("Benutzername zu kurz!");
+					meldung.setForeground(Color.red);
+					meldung.setVisible(true);
+				} else if (!passwort.getText().equals(passwortBestaetigen.getText()) && passwort.getText().length() > 4) {
+					meldung.setText("Passwoerter stimmen nicht überein!");
+					meldung.setForeground(Color.red);
+					meldung.setVisible(true);
+				} else {
+					Benutzer b = new Benutzer();
+					b.setBenutzername(benutzername.getText());
+					b.setEmail(email.getText());
+					b.setPasswort(passwort.getText());
+					BenutzerController.getUserController().registerBenutzer(b);
+					System.out.println("Benutzer Registriert!!!");
+					LoginView loginview = new LoginView();
+					loginview.setSize(1000, 1000);
+					loginview.pack();
+					loginview.setResizable(false);
+					loginview.setVisible(true);
+					meldung.setVisible(false);
+					setVisible(false);
 				}
 			}
 
