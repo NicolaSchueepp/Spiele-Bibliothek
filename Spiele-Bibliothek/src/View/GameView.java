@@ -30,6 +30,7 @@ public class GameView extends JFrame {
 	public static void main(String[] args) {
 		GameView gui = new GameView();
 		gui.setSize(1000, 1000);
+		gui.pack();
 		gui.setResizable(false);
 		gui.setVisible(true);
 
@@ -56,6 +57,7 @@ public class GameView extends JFrame {
 		
 		final JPanel panelMitte = new JPanel();
 		panelMitte.add(gameText);
+		panelMitte.add(video);
 		
 		final JPanel inDenWarenkorb = new JPanel(new GridLayout(1, 1));
 		inDenWarenkorb.add(inWarenkorb);
