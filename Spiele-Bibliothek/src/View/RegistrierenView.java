@@ -44,7 +44,7 @@ public class RegistrierenView extends LoginView {
 						meldung.setVisible(true);
 
 					} else if (!passwort.getText().equals(passwortBestaetigen.getText()) && passwort.getText().length() > 4) {
-						meldung.setText("Passwörter stimmen nicht überein!");
+						meldung.setText("Passwoerter stimmen nicht überein!");
 						meldung.setForeground(Color.red);
 						meldung.setVisible(true);
 					} else {

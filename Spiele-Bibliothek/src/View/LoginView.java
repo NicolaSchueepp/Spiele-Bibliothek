@@ -31,12 +31,12 @@ public class LoginView extends JFrame {
 	protected JPanel southPanel = new JPanel();
 	protected JLabel logo = new JLabel(loadIcon("Logo.png"));
 	protected static JLabel meldung = new JLabel("");
-	protected static JButton backToLogIn = new JButton("Zurück zum Log in");
+	protected static JButton backToLogIn = new JButton("Zurueck zum Log in");
 	protected static JButton registrieren = new JButton("Registrieren");
 	protected final static JTextField email = new JTextField();
 	protected static JPasswordField passwortBestaetigen = new JPasswordField();
 	protected JLabel emailT = new JLabel("E-Mail:");
-	protected JLabel passwortBestaetigenT = new JLabel("Passwort bestätigen");
+	protected JLabel passwortBestaetigenT = new JLabel("Passwort bestaetigen");
 
 	public static void main(String[] args) {
 		LoginView gui = new LoginView();
@@ -101,7 +101,7 @@ public class LoginView extends JFrame {
 						meldung.setVisible(false);
 						setVisible(false);
 					} else {
-						meldung.setText("Benutzername / Passwort ist ungültig!");
+						meldung.setText("Benutzername / Passwort ist ungueltig!");
 						meldung.setForeground(Color.red);
 						meldung.setVisible(true);
 					}
