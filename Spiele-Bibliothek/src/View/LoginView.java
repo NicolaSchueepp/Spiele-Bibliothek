@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Controller.BenutzerController;
+import exception.UserNotFoundException;
 import model.Benutzer;
 
 public class LoginView extends JFrame {
@@ -87,7 +88,14 @@ public class LoginView extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Benutzer benutzer = BenutzerController.getUserController().searchPasswortByName(benutzername.getText());
+				Benutzer benutzer = null;
+				try {
+					benutzer = BenutzerController.getUserController().searchPasswortByName(benutzername.getText());
+				}catch (UserNotFoundException b) {
+					meldung.setText("Benutzername / Passwort ist ungueltig!");
+					meldung.setForeground(Color.red);
+					meldung.setVisible(true);
+				}
 				if (passwort.getText().equals(benutzer.getPasswort())) {
 					HomeView homeview = new HomeView();
 					homeview.setSize(1500, 900);

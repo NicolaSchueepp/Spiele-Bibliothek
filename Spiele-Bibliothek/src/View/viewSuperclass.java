@@ -20,7 +20,7 @@ public class viewSuperclass extends JFrame {
 	private static final long serialVersionUID = 4971276353377865761L;
 	protected JLabel searchIcon = new JLabel(loadIcon("search.png"));
 	protected JButton homeButton = new JButton("Home");
-	protected JButton genreButton = new JButton("Genre");
+	protected JButton spieleButton = new JButton("Shop");
 	protected JButton warenkorbButton = new JButton("Warenkorb");
 	protected JButton bibliothekButton = new JButton("Bibliothek");
 	protected JTextField searchField = new JTextField(20);
@@ -29,7 +29,7 @@ public class viewSuperclass extends JFrame {
 	public void printMainMenu() {
 		final JPanel buttonNavigation = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		buttonNavigation.add(homeButton);
-		buttonNavigation.add(genreButton);
+		buttonNavigation.add(spieleButton);
 		buttonNavigation.add(warenkorbButton);
 		buttonNavigation.add(bibliothekButton);
 		
@@ -58,11 +58,11 @@ public class viewSuperclass extends JFrame {
 			}
 		});
 		
-		genreButton.addActionListener(new ActionListener() {
+		spieleButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GenreView genreview = new GenreView();
+				ShopView genreview = new ShopView();
 				genreview.setSize(1500, 900);
 				genreview.setResizable(false);
 				genreview.setVisible(true);
