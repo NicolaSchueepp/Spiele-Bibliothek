@@ -13,10 +13,13 @@ import javax.swing.JPanel;
 public class GameView extends HomeView {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel gameText = new JLabel("GameText");
+	protected JLabel gameText = new JLabel("GameText");
 	protected static JLabel video = new JLabel("Video");
-	private JButton inWarenkorb = new JButton("In den Warenkorb");
-	private JButton bewerten = new JButton("Bewertung senden");
+	protected JButton inWarenkorb = new JButton("In den Warenkorb");
+	protected JButton bewerten = new JButton("Bewertung senden");
+	protected JPanel panelMitte = new JPanel(new GridLayout(1, 0));
+	protected JPanel panelUnten = new JPanel(new GridLayout(1, 0));
+	
 	JFrame sterne = new JFrame("");
     @SuppressWarnings("rawtypes")
 	JComboBox combobox;
@@ -37,26 +40,29 @@ public class GameView extends HomeView {
 		
 		combobox = new JComboBox(new Object[] {"1", "2", "3", "4", "5"});
 		
-		final JPanel panelMitteLinks = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		final JPanel panelMitteLinks = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100));
 		panelMitteLinks.add(gameText);
 		
-		final JPanel panelMitteRechts = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		final JPanel panelMitteRechts = new JPanel(new FlowLayout(FlowLayout.RIGHT, 600, 100));
 		panelMitteRechts.add(video);
 		
-		final JPanel inDenWarenkorb = new JPanel(new GridLayout(1, 1));
+		final JPanel inDenWarenkorb = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100));
 		inDenWarenkorb.add(inWarenkorb);
 		
-		final JPanel bewertung = new JPanel(new GridLayout(1, 2));
+		final JPanel bewertung = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 100));
 		bewertung.add(bewerten);
-		bewertung.add(combobox);
 		
+		final JPanel sterne = new JPanel(new FlowLayout(FlowLayout.RIGHT, 465, 100));
+		sterne.add(combobox);
 		
-		final JPanel panelUnten = new JPanel();
+		panelMitte.add(panelMitteLinks);
+		panelMitte.add(panelMitteRechts);
+		
 		panelUnten.add(inDenWarenkorb);
 		panelUnten.add(bewertung);
+		panelUnten.add(sterne);
 		
-		add(panelMitteLinks, BorderLayout.CENTER);
-		add(panelMitteRechts, BorderLayout.CENTER);
+		add(panelMitte, BorderLayout.CENTER);
 		add(panelUnten, BorderLayout.SOUTH);
 		
 	}
