@@ -58,12 +58,17 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				searchField.setText("");
+				if (searchField.getText().equals("Suchen")) {
+					searchField.setText("");
+				}
+				
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				searchField.setText("Suchen");
+				if (searchField.getText().equals("")) {
+					searchField.setText("Suchen");
+				}
 			}
 			
 		});

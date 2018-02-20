@@ -24,20 +24,23 @@ import model.Benutzer;
 
 public class LoginView extends JFrame {
 
-	private static final long serialVersionUID = -7102879226099900568L;
-	protected final static JTextField benutzername = new JTextField("", 20);
-	protected static JPasswordField passwort = new JPasswordField("", 20);
-	protected static JButton login = new JButton("LogIn");
-	protected static JButton registNow = new JButton("Jetzt Registrieren");
-	protected static JLabel benutzernameT = new JLabel("Benutzername:");
-	protected static JLabel passwortT = new JLabel("Passwort:");
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1996805941238253797L;
+	protected JTextField benutzername = new JTextField("", 20);
+	protected JPasswordField passwort = new JPasswordField("", 20);
+	protected JButton login = new JButton("LogIn");
+	protected JButton registNow = new JButton("Jetzt Registrieren");
+	protected JLabel benutzernameT = new JLabel("Benutzername:");
+	protected JLabel passwortT = new JLabel("Passwort:");
 	protected JPanel southPanel = new JPanel();
 	protected JLabel logo = new JLabel(loadIcon("Logo.png"));
-	protected static JLabel meldung = new JLabel("");
-	protected static JButton backToLogIn = new JButton("Zurueck zum Log in");
-	protected static JButton registrieren = new JButton("Registrieren");
-	protected final static JTextField email = new JTextField();
-	protected static JPasswordField passwortBestaetigen = new JPasswordField();
+	protected JLabel meldung = new JLabel("");
+	protected JButton backToLogIn = new JButton("Zurueck zum Log in");
+	protected JButton registrieren = new JButton("Registrieren");
+	protected JTextField email = new JTextField();
+	protected JPasswordField passwortBestaetigen = new JPasswordField();
 	protected JLabel emailT = new JLabel("E-Mail:");
 	protected JLabel passwortBestaetigenT = new JLabel("Passwort bestaetigen");
 
@@ -52,17 +55,17 @@ public class LoginView extends JFrame {
 	public LoginView() {
 		printMainLogin();
 		getRootPane().setDefaultButton(login);
-		final JPanel loginLabelPanel = new JPanel(new GridLayout(0, 1));
+		JPanel loginLabelPanel = new JPanel(new GridLayout(0, 1));
 		loginLabelPanel.add(benutzernameT);
 		loginLabelPanel.add(passwortT);
 		loginLabelPanel.add(new JLabel(""));
 
-		final JPanel loginInputPanel = new JPanel(new GridLayout(0, 1));
+		JPanel loginInputPanel = new JPanel(new GridLayout(0, 1));
 		loginInputPanel.add(benutzername);
 		loginInputPanel.add(passwort);
 		loginInputPanel.add(meldung);
 
-		final JPanel loginPanel = new JPanel();
+		JPanel loginPanel = new JPanel();
 		loginPanel.add(loginLabelPanel);
 		loginPanel.add(loginInputPanel);
 
@@ -125,8 +128,8 @@ public class LoginView extends JFrame {
 		});
 	}
 
-	public static Icon loadIcon(String iconName) {
-		final URL resource = LoginView.class.getResource("/images/" + iconName);
+	public Icon loadIcon(String iconName) {
+		URL resource = LoginView.class.getResource("/images/" + iconName);
 
 		if (resource == null) {
 			System.err.println("Fehler: " + "/images/" + iconName);

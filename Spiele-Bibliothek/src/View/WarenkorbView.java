@@ -16,9 +16,6 @@ public class WarenkorbView extends viewSuperclass {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		printMainMenu();
 
-
-//		add(panelMitte, BorderLayout.CENTER);
-//		add(panelUnten, BorderLayout.SOUTH);
 		
 	}
 

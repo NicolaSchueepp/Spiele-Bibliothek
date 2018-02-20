@@ -93,21 +93,21 @@ public class RegistrierenView extends LoginView {
 	}
 
 	public void printRegistrieren() {
-		final JPanel registrierenLabelPanel = new JPanel(new GridLayout(0, 1));
+		JPanel registrierenLabelPanel = new JPanel(new GridLayout(0, 1));
 		registrierenLabelPanel.add(emailT);
 		registrierenLabelPanel.add(benutzernameT);
 		registrierenLabelPanel.add(passwortT);
 		registrierenLabelPanel.add(passwortBestaetigenT);
 		registrierenLabelPanel.add(new JLabel(""));
 
-		final JPanel registrierenInputPanel = new JPanel(new GridLayout(0, 1));
+		JPanel registrierenInputPanel = new JPanel(new GridLayout(0, 1));
 		registrierenInputPanel.add(email);
 		registrierenInputPanel.add(benutzername);
 		registrierenInputPanel.add(passwort);
 		registrierenInputPanel.add(passwortBestaetigen);
 		registrierenInputPanel.add(meldung);
 
-		final JPanel registrierenPanel = new JPanel();
+		JPanel registrierenPanel = new JPanel();
 		registrierenPanel.add(registrierenLabelPanel);
 		registrierenPanel.add(registrierenInputPanel);
 

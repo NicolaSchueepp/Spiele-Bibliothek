@@ -37,7 +37,7 @@ foreign key(Game_ID) references Game(ID),
 foreign key(Benutzer_ID) references Benutzer(ID)
 );
 
-LOAD DATA LOCAL INFILE 'H:\\git\\Spiele-Bibliothek\\Spiele-Bibliothek\\sql\\Game.csv'
+LOAD DATA LOCAL INFILE 'C:\\Users\\nicola.schueepp\\git\\Spiele-Bibliothek\\Spiele-Bibliothek\\sql\\Game.csv'
 INTO TABLE game
 CHARACTER SET utf8
 FIELDS TERMINATED BY ';'
@@ -50,11 +50,14 @@ Values('Admin', '1234', 'admin@help.bbcag');
 
 insert into bewertung
 (Game_ID, Benutzer_ID, Bewertung)
-Values(26,20,3);
-
+Values(26,20,3),
+(1,20,5),
+(5,20,5),
+(12,20,4),
+(17,20,2);
 
 Explain benutzer;
-delete from benutzer;
+
 Select * from Game;
 Select * from benutzer;
 Select * from bewertung;
