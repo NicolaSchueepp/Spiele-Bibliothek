@@ -2,6 +2,7 @@ package Controller;
 
 import datenbank.SpielBewertungDao;
 import datenbank.SpielBewertungJDBCDao;
+import model.Spiel;
 
 public class SpielController {
 	private static final SpielController GAME_CONTROLLER = new SpielController();
@@ -14,7 +15,7 @@ public class SpielController {
 	
 	private final SpielBewertungDao SPIELBEWERTUNG_DAO = new SpielBewertungJDBCDao();
 	
-	public String[] searchTopGames() {
+	public Spiel[] searchTopGames() {
 		return SPIELBEWERTUNG_DAO.findTopGamesCover();
 	}
 }

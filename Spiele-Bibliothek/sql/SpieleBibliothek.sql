@@ -58,11 +58,3 @@ delete from benutzer;
 Select * from Game;
 Select * from benutzer;
 Select * from bewertung;
-
-Select cover from (select Bewertung as bewertung, Game.Cover as cover from bewertung join Game on Bewertung.Game_ID=Game.ID ORDER BY Bewertung DESC LIMIT 4)T;
-
-
-
-
-
-

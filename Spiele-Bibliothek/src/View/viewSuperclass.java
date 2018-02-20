@@ -5,6 +5,11 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.net.URL;
 
 import javax.swing.Icon;
@@ -27,6 +32,7 @@ public class viewSuperclass extends JFrame {
 	protected JPanel northPanel = new JPanel(new GridLayout(1, 0));
 	
 	public void printMainMenu() {
+		
 		final JPanel buttonNavigation = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		buttonNavigation.add(homeButton);
 		buttonNavigation.add(spieleButton);
@@ -46,6 +52,34 @@ public class viewSuperclass extends JFrame {
 		northPanel.add(buttonNavigation2);
 		northPanel.add(searchPanel);
 		add(northPanel, BorderLayout.NORTH);
+		
+		searchField.setText("Suchen");
+		searchField.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				searchField.setText("");
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				searchField.setText("Suchen");
+			}
+			
+		});
+		
+		searchField.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ShopView shopView = new ShopView();
+				shopView.setSize(1500, 900);
+				shopView.setResizable(false);
+				shopView.setVisible(true);
+				setVisible(false);
+			}
+		});
+		
 		homeButton.addActionListener(new ActionListener() {
 
 			@Override

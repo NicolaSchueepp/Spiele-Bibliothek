@@ -13,19 +13,19 @@ import model.Benutzer;
 
 public class RegistrierenView extends LoginView {
 	private static final long serialVersionUID = -7102879226099900568L;
-//
-//	public static void main(String[] args) {
-//		RegistrierenView gui = new RegistrierenView();
-//		gui.setSize(1000, 1000);
-//		gui.pack();
-//		gui.setResizable(false);
-//		gui.setVisible(true);
-//	}
+
+	public static void main(String[] args) {
+		RegistrierenView gui = new RegistrierenView();
+		gui.setSize(1000, 1000);
+		gui.pack();
+		gui.setResizable(false);
+		gui.setVisible(true);
+	}
 
 	public RegistrierenView() {
 		this.printMainLogin();
 		printRegistrieren();
-
+		getRootPane().setDefaultButton(registrieren);
 		// Registrieren
 		registrieren.addActionListener(new ActionListener() {
 			

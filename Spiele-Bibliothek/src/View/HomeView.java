@@ -1,20 +1,21 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 import Controller.SpielController;
+import model.Spiel;
 
 public class HomeView extends viewSuperclass {
 	private static final long serialVersionUID = 4724085734802179441L;
@@ -72,15 +73,26 @@ public class HomeView extends viewSuperclass {
 		centerPanel.add(centerSouthPanel);
 		
 		JPanel topGamesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40,80));
-		String[] topSpiele = SpielController.getGameController().searchTopGames();
+		Spiel[] topSpiele = SpielController.getGameController().searchTopGames();
 		
 		for (int i = 0; i<4; i++) {
-			JButton button = new JButton(loadIcon(topSpiele[i]));
+			JButton button = new JButton(loadIcon(topSpiele[i].getCover()));
 			topGamesPanel.add(button);
 			button.setBorder(null);
 			button.setBackground(getBackground());
 
-			
+			button.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {
+					button.setBorder(null);
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					button.setContentAreaFilled(false);
+		            button.setBorder(new LineBorder(Color.BLACK));
+				}
+			});
 		}
 		
 		add(centerPanel, BorderLayout.CENTER);
