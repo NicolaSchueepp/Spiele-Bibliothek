@@ -54,8 +54,9 @@ public class GameView extends viewSuperclass {
 		final JPanel bewertung = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 100));
 		bewertung.add(bewerten);
 		
-		final JPanel sterne = new JPanel(new FlowLayout(FlowLayout.RIGHT, 465, 100));
+		final JPanel sterne = new JPanel(new FlowLayout(FlowLayout.RIGHT, 460, 100));
 		sterne.add(combobox);
+		
 		
 		panelMitte.add(panelMitteLinks);
 		panelMitte.add(panelMitteRechts);
