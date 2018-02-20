@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-public class GenreView extends HomeView {
+public class GenreView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
 	JComboBox<Object> genreBox;
@@ -22,6 +22,8 @@ public class GenreView extends HomeView {
 	public GenreView() {
 		setTitle("Genre");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		printMainMenu();
+
 		
 		genreBox = new JComboBox<Object>(new Object[] {"Action", "Adventure", "Ego Shooter", "Gesellschaft", "Rollenspiel", "Simulation", "Sport"});
 		

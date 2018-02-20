@@ -1,6 +1,6 @@
 package View;
 
-public class WarenkorbView extends HomeView {
+public class WarenkorbView extends viewSuperclass {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -14,6 +14,8 @@ public class WarenkorbView extends HomeView {
 	public WarenkorbView() {
 		setTitle("Warenkorb");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		printMainMenu();
+
 
 //		add(panelMitte, BorderLayout.CENTER);
 //		add(panelUnten, BorderLayout.SOUTH);

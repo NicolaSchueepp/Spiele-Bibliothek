@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GameView extends HomeView {
+public class GameView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
 	protected JLabel gameText = new JLabel("GameText");
@@ -37,6 +37,8 @@ public class GameView extends HomeView {
 	public GameView() {
 		setTitle("Game");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		printMainMenu();
+
 		
 		combobox = new JComboBox(new Object[] {"1", "2", "3", "4", "5"});
 		

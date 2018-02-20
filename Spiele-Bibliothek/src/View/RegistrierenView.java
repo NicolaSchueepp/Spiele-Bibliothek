@@ -28,11 +28,12 @@ public class RegistrierenView extends LoginView {
 
 		// Registrieren
 		registrieren.addActionListener(new ActionListener() {
+			
 
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (email.getText().length() < 5) {
+				if (email.getText().equals("*")) {
 					meldung.setText("Invalide Email Adresse!");
 					meldung.setForeground(Color.red);
 					meldung.setVisible(true);
@@ -68,11 +69,11 @@ public class RegistrierenView extends LoginView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LoginView a = new LoginView();
-				a.setSize(1000, 1000);
-				a.pack();
-				a.setResizable(false);
-				a.setVisible(true);
+				LoginView loginview = new LoginView();
+				loginview.setSize(1000, 1000);
+				loginview.pack();
+				loginview.setResizable(false);
+				loginview.setVisible(true);
 				meldung.setVisible(false);
 				setVisible(false);
 			}

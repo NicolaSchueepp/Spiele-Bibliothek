@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class BibliothekView extends HomeView {
+public class BibliothekView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
 	private JButton download = new JButton("Download");
@@ -26,6 +26,7 @@ public class BibliothekView extends HomeView {
 	public BibliothekView() {
 		setTitle("Bibliothek");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		printMainMenu();		
 	
 		final JPanel gameView = new JPanel(new GridLayout(3, 1));
 		gameView.add(logo);
