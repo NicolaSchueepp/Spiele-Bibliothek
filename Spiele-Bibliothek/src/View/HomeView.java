@@ -73,10 +73,10 @@ public class HomeView extends viewSuperclass {
 		centerPanel.add(centerSouthPanel);
 		
 		JPanel topGamesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40,80));
-		Spiel[] topSpiele = SpielController.getGameController().searchTopGames();
+		String[] topSpiele = SpielController.getGameController().searchTopGames();
 		
 		for (int i = 0; i<4; i++) {
-			JButton button = new JButton(loadIcon(topSpiele[i].getCover()));
+			JButton button = new JButton(loadIcon(topSpiele[i]));
 			topGamesPanel.add(button);
 			button.setBorder(null);
 			button.setBackground(getBackground());

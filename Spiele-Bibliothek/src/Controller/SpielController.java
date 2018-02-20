@@ -15,7 +15,7 @@ public class SpielController {
 	
 	private final SpielBewertungDao SPIELBEWERTUNG_DAO = new SpielBewertungJDBCDao();
 	
-	public Spiel[] searchTopGames() {
+	public String[] searchTopGames() {
 		return SPIELBEWERTUNG_DAO.findTopGamesCover();
 	}
 }

@@ -13,11 +13,11 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 	
 	@SuppressWarnings("null")
 	@Override
-	public Spiel[] findTopGamesCover() {
+	public String[] findTopGamesCover() {
 		final String SQL = "Select id, bezeichnung, hersteller, preis, erscheinungsjahr, genre, beschreibung, cover from (select Bewertung as bewertung, Game.ID as id, Game.Bezeichnung as bezeichnung, Game.Hersteller as hersteller, Game.Preis as preis, Game.Erscheinungsjahr as erscheinungsjahr, Game.Genre as genre, Game.Beschreibung as beschreibung, Game.Cover as cover from bewertung join Game on Bewertung.Game_ID=Game.ID ORDER BY Bewertung DESC LIMIT 4)T";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Spiel[] topSpiele = new Spiel[4];
+		String[] topSpiele = new String[4];
 		
 		try {
 			ps = con.prepareStatement(SQL);
@@ -25,14 +25,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 			
 			for(int i = 0; i<4; i++) {
 				while (rs.next()) {
-					topSpiele[i].setId(rs.getInt("id"));
-					topSpiele[i].setBezeichnung(rs.getString("bezeichnung"));
-					topSpiele[i].setHersteller(rs.getString("hersteller"));
-					topSpiele[i].setPreis(rs.getFloat("preis"));
-					topSpiele[i].setErscheinungsjahr(rs.getInt("erscheinungsjahr"));
-					topSpiele[i].setGenre(rs.getString("genre"));
-					topSpiele[i].setBeschreibung(rs.getString("beschreibung"));
-					topSpiele[i].setCover(rs.getString("cover"));
+					topSpiele[i] = rs.getString("cover");
 					break;
 				}
 			}
