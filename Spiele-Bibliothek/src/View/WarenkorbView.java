@@ -24,13 +24,6 @@ public class WarenkorbView extends viewSuperclass {
 	protected JPanel panelMitte = new JPanel(new GridLayout(1,0));
 	protected JPanel panelUnten = new JPanel(new GridLayout(1,0));
 
-	public static void main(String[] args) {
-		WarenkorbView gui = new WarenkorbView(null);
-		gui.setSize(1500, 900);
-		gui.setResizable(false);
-		gui.setVisible(true);
-	}
-	
 	public WarenkorbView(Benutzer benutzer) {
 		setTitle("Warenkorb");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
