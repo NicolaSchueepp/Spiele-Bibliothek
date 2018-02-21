@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.List;
+
 import datenbank.SpielBewertungDao;
 import datenbank.SpielBewertungJDBCDao;
 import model.Spiel;
@@ -15,7 +17,7 @@ public class SpielController {
 	
 	private final SpielBewertungDao SPIELBEWERTUNG_DAO = new SpielBewertungJDBCDao();
 	
-	public String[] searchTopGames() {
-		return SPIELBEWERTUNG_DAO.findTopGamesCover();
+	public List<Spiel> searchTopGames() {
+		return SPIELBEWERTUNG_DAO.findTopGames();
 	}
 }
