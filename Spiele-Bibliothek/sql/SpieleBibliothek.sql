@@ -61,3 +61,7 @@ Explain benutzer;
 Select * from Game;
 Select * from benutzer;
 Select * from bewertung;
+Select id, bezeichnung, hersteller, preis, erscheinungsjahr, genre, beschreibung, cover 
+from (select Game.ID as id, Game.Bezeichnung as bezeichnung, Game.Hersteller as hersteller, Game.Preis as preis
+, Game.Erscheinungsjahr as erscheinungsjahr, Game.Genre as genre, Game.Beschreibung as beschreibung, Game.Cover as cover 
+ORDER BY Genre DESC LIMIT 4)T;
