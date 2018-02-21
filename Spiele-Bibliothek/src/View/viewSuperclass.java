@@ -3,14 +3,12 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -59,6 +57,7 @@ public class viewSuperclass extends JFrame {
 		add(northPanel, BorderLayout.NORTH);
 		
 		searchField.setText("Suchen");
+		searchField.setFont(new Font("Open Sans", 15, 15));
 		searchField.addFocusListener(new FocusListener() {
 
 			@Override
@@ -89,7 +88,7 @@ public class viewSuperclass extends JFrame {
 				setVisible(false);
 			}
 		});
-		
+		homeButton.setFont(new Font("Open Sans", 15, 15));
 		homeButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -101,7 +100,7 @@ public class viewSuperclass extends JFrame {
 				setVisible(false);
 			}
 		});
-		
+		shopButton.setFont(new Font("Open Sans", 15, 15));
 		shopButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -113,7 +112,7 @@ public class viewSuperclass extends JFrame {
 				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
-		
+		warenkorbButton.setFont(new Font("Open Sans", 15, 15));
 		warenkorbButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -125,7 +124,7 @@ public class viewSuperclass extends JFrame {
 				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
-		
+		bibliothekButton.setFont(new Font("Open Sans", 15, 15));
 		bibliothekButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -154,10 +153,10 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ShopView genreview = new ShopView(benutzer);
-				genreview.setSize(1500, 900);
-				genreview.setResizable(false);
-				genreview.setVisible(true);
+				ShopView shopView = new ShopView(benutzer);
+				shopView.setSize(1500, 900);
+				shopView.setResizable(false);
+				shopView.setVisible(true);
 				setVisible(false);
 			}
 		});

@@ -19,12 +19,6 @@ public class BibliothekView extends viewSuperclass {
 	private JLabel assasinsCreedText = new JLabel("TEXT");
 	private JLabel logoText = new JLabel("TEXT2");
 
-	public static void main(String[] args) {
-		BibliothekView gui = new BibliothekView(null);
-		gui.setSize(1500, 900);
-		gui.setResizable(false);
-		gui.setVisible(true);
-	}
 	public BibliothekView(Benutzer benutzer) {
 		setTitle("Bibliothek");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

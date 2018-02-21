@@ -24,9 +24,6 @@ import model.Benutzer;
 
 public class LoginView extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1996805941238253797L;
 	protected JTextField benutzername = new JTextField("", 20);
 	protected JPasswordField passwort = new JPasswordField("", 20);

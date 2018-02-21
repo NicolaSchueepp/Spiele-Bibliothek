@@ -9,7 +9,7 @@ import exception.UserNotFoundException;
 import model.Benutzer;
 
 public class BenutzerJDBCDao implements BenutzerDao {
-	
+
 	private final Connection con = ConnectionFactory.getInstance().getConnection();
 
 	@Override
@@ -18,25 +18,25 @@ public class BenutzerJDBCDao implements BenutzerDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Benutzer benutzer = null;
-		
+
 		try {
 			ps = con.prepareStatement(SQL);
 			ps.setString(1, name);
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				benutzer = new Benutzer();
 				benutzer.setPasswort(rs.getString("passwort"));
 				break;
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			throw new RuntimeException("Oh oh", e);
 		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 				}
-				
+
 				if (ps != null) {
 					ps.close();
 				}
@@ -44,12 +44,12 @@ public class BenutzerJDBCDao implements BenutzerDao {
 				throw new RuntimeException("Oh oh", e);
 			}
 		}
-		
+
 		if (benutzer != null) {
 			return benutzer;
-		}else {
-			throw new UserNotFoundException("No user with Name "+name +" found.");
-		}		
+		} else {
+			throw new UserNotFoundException("No user with Name " + name + " found.");
+		}
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BenutzerJDBCDao implements BenutzerDao {
 			ps.setString(3, benutzer.getEmail());
 			ps.executeUpdate();
 
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
