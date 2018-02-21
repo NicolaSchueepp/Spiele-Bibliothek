@@ -9,11 +9,15 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import model.Benutzer;
+import model.Spiel;
 
 public class GameView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
-	protected JLabel gameText = new JLabel("GameText");
+	protected JTextArea gameText = new JTextArea("GameText");
 	protected static JLabel video = new JLabel("Video");
 	protected JButton inWarenkorb = new JButton("In den Warenkorb");
 	protected JButton bewerten = new JButton("Bewertung senden");
@@ -26,7 +30,7 @@ public class GameView extends viewSuperclass {
 	
 	
 	public static void main(String[] args) {
-		GameView gui = new GameView();
+		GameView gui = new GameView(null, null);
 		gui.setSize(1500, 900);
 		gui.setResizable(false);
 		gui.setVisible(true);
@@ -34,15 +38,19 @@ public class GameView extends viewSuperclass {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public GameView() {
+	public GameView(Benutzer benutzer, Spiel spiel) {
 		setTitle("Game");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		printMainMenu();
-
+		addMainMenu(benutzer);
 		
 		combobox = new JComboBox(new Object[] {"1", "2", "3", "4", "5"});
 		
 		final JPanel panelMitteLinks = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100));
+//		gameText.setText(spiel.getBeschreibung());
+		gameText.setBackground(getBackground());
+		for(int i = 100; i<gameText.getText().length();i+=100) {
+			gameText.insert("\n", i);
+		}
 		panelMitteLinks.add(gameText);
 		
 		final JPanel panelMitteRechts = new JPanel(new FlowLayout(FlowLayout.RIGHT, 600, 100));

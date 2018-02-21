@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
 import javax.swing.Icon;
@@ -20,22 +23,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Benutzer;
+
 public class viewSuperclass extends JFrame {
 
 	private static final long serialVersionUID = 4971276353377865761L;
 	protected JLabel searchIcon = new JLabel(loadIcon("search.png"));
 	protected JButton homeButton = new JButton("Home");
-	protected JButton spieleButton = new JButton("Shop");
+	protected JButton shopButton = new JButton("Shop");
 	protected JButton warenkorbButton = new JButton("Warenkorb");
 	protected JButton bibliothekButton = new JButton("Bibliothek");
 	protected JTextField searchField = new JTextField(20);
 	protected JPanel northPanel = new JPanel(new GridLayout(1, 0));
 	
-	public void printMainMenu() {
+	public void addMainMenu(Benutzer benutzer) {
 		
 		final JPanel buttonNavigation = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		buttonNavigation.add(homeButton);
-		buttonNavigation.add(spieleButton);
+		buttonNavigation.add(shopButton);
 		buttonNavigation.add(warenkorbButton);
 		buttonNavigation.add(bibliothekButton);
 		
@@ -77,7 +82,7 @@ public class viewSuperclass extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ShopView shopView = new ShopView();
+				ShopView shopView = new ShopView(benutzer);
 				shopView.setSize(1500, 900);
 				shopView.setResizable(false);
 				shopView.setVisible(true);
@@ -89,7 +94,7 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HomeView homeview = new HomeView();
+				HomeView homeview = new HomeView(benutzer);
 				homeview.setSize(1500, 900);
 				homeview.setResizable(false);
 				homeview.setVisible(true);
@@ -97,11 +102,59 @@ public class viewSuperclass extends JFrame {
 			}
 		});
 		
-		spieleButton.addActionListener(new ActionListener() {
+		shopButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		
+		warenkorbButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		
+		bibliothekButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		
+		homeButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		
+		shopButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ShopView genreview = new ShopView();
+				ShopView genreview = new ShopView(benutzer);
 				genreview.setSize(1500, 900);
 				genreview.setResizable(false);
 				genreview.setVisible(true);
@@ -113,7 +166,7 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				WarenkorbView warenkorbview = new WarenkorbView();
+				WarenkorbView warenkorbview = new WarenkorbView(benutzer);
 				warenkorbview.setSize(1500, 900);
 				warenkorbview.setResizable(false);
 				warenkorbview.setVisible(true);
@@ -125,7 +178,7 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BibliothekView bibliothekView = new BibliothekView();
+				BibliothekView bibliothekView = new BibliothekView(benutzer);
 				bibliothekView.setSize(1500, 900);
 				bibliothekView.setResizable(false);
 				bibliothekView.setVisible(true);

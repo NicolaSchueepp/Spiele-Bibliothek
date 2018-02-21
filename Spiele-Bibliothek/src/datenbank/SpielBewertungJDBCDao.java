@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.UserNotFoundException;
 import model.Spiel;
 
 public class SpielBewertungJDBCDao implements SpielBewertungDao {
@@ -66,10 +67,51 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 		return null;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public List<Spiel> findAllGames() {
-		// TODO Auto-generated method stub
-		return null;
+		final String SQL = "select * from Game";
+		PreparedStatement ps= null;
+		ResultSet rs = null;
+		List<Spiel> alleSpiele = new ArrayList<Spiel>();
+		
+		try {
+			ps = con.prepareStatement(SQL);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Spiel spiel = new Spiel();
+				spiel.setId(rs.getInt("id"));
+				spiel.setBezeichnung(rs.getString("bezeichnung"));
+				spiel.setHersteller(rs.getString("Hersteller"));
+				spiel.setPreis(rs.getFloat("preis"));
+				spiel.setErscheinungsjahr(rs.getInt("erscheinungsjahr"));
+				spiel.setGenre(rs.getString("genre"));
+				spiel.setBeschreibung(rs.getString("beschreibung"));
+				spiel.setCover(rs.getString("cover"));
+				
+				alleSpiele.add(spiel);
+				break;
+			}
+			
+			
+		} catch(SQLException e) {
+			throw new RuntimeException("Oh oh", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Oh oh", e);
+			}
+		}
+		
+		return alleSpiele;
 	}
 
 }

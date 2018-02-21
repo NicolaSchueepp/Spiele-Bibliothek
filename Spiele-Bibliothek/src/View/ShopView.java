@@ -1,39 +1,42 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import model.Benutzer;
 
 public class ShopView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
-	JComboBox<Object> genreBox;
+	JComboBox<String> genreBox;
 
 	public static void main(String[] args) {
-		ShopView gui = new ShopView();
+		ShopView gui = new ShopView(null);
 		gui.setSize(1500, 900);
 		gui.setResizable(false);
 		gui.setVisible(true);
 		
 	}
 	
-	public ShopView() {
+	public ShopView(Benutzer benutzer) {
 		setTitle("Genre");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		printMainMenu();
-
+		addMainMenu(benutzer);
 		
-		genreBox = new JComboBox<Object>(new Object[] {"--> Alle Spiele <--","Action", "Adventure", "Ego Shooter", "Gesellschaft", "Rollenspiel", "Simulation", "Sport"});
+		genreBox = new JComboBox<String>(new String[] {"--> Alle Spiele <--","Action", "Adventure", "Ego Shooter", "Gesellschaft", "Rollenspiel", "Simulation", "Sport"});
 		
-		final JPanel bewertung = new JPanel(new GridLayout(1, 2));
-		bewertung.add(genreBox);
+		final JPanel centerGenreBox = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		centerGenreBox.add(genreBox);
 		
-		final JPanel panelMitte = new JPanel();
-		panelMitte.add(bewertung);
+		final JPanel centerPanel = new JPanel();
+		centerPanel.add(centerGenreBox);
 		
-		add(panelMitte, BorderLayout.CENTER);
+		add(centerPanel, BorderLayout.CENTER);
+		
 	}
 
 }

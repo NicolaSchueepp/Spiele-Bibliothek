@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.Benutzer;
+
 public class BibliothekView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
@@ -18,16 +20,16 @@ public class BibliothekView extends viewSuperclass {
 	private JLabel logoText = new JLabel("TEXT2");
 
 	public static void main(String[] args) {
-		BibliothekView gui = new BibliothekView();
+		BibliothekView gui = new BibliothekView(null);
 		gui.setSize(1500, 900);
 		gui.setResizable(false);
 		gui.setVisible(true);
 	}
-	public BibliothekView() {
+	public BibliothekView(Benutzer benutzer) {
 		setTitle("Bibliothek");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		printMainMenu();		
-	
+		addMainMenu(benutzer);
+		
 		final JPanel gameView = new JPanel(new GridLayout(3, 1));
 		gameView.add(logo);
 		gameView.add(assasinsCreed);

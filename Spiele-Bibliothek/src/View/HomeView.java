@@ -2,21 +2,26 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 import Controller.SpielController;
+import model.Benutzer;
 import model.Spiel;
 
 public class HomeView extends viewSuperclass {
@@ -25,16 +30,16 @@ public class HomeView extends viewSuperclass {
 	protected JTextArea textArea = new JTextArea(5,10);
 	
 	public static void main(String[] args) {
-		HomeView gui = new HomeView();
+		HomeView gui = new HomeView(null);
 		gui.setSize(1500, 900);
 		gui.setResizable(false);
 		gui.setVisible(true);
 	}
 	
-	public HomeView() {
+	public HomeView(Benutzer benutzer) {
 		setTitle("Home");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		printMainMenu();
+		addMainMenu(benutzer);
 		textArea.setEditable(false);
 		textArea.setBackground(getBackground());
 		textArea.setText("Lorem ipsum dolor sit amet, consetetur "
@@ -83,17 +88,28 @@ public class HomeView extends viewSuperclass {
 			topGamesPanel.add(button);
 			button.setBorder(null);
 			button.setBackground(getBackground());
-
+			
 			button.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseExited(MouseEvent e) {
-					button.setBorder(null);
+					setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 				}
 				
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					button.setContentAreaFilled(false);
-		            button.setBorder(new LineBorder(Color.BLACK));
+					setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+			});
+			
+			button.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					GameView game = new GameView(benutzer, spiel);
+					game.setSize(1500,900);
+					game.setResizable(false);
+					game.setVisible(true);
+					setVisible(false);
 				}
 			});
 		}

@@ -55,6 +55,7 @@ public class LoginView extends JFrame {
 	public LoginView() {
 		printMainLogin();
 		getRootPane().setDefaultButton(login);
+		
 		JPanel loginLabelPanel = new JPanel(new GridLayout(0, 1));
 		loginLabelPanel.add(benutzernameT);
 		loginLabelPanel.add(passwortT);
@@ -112,7 +113,7 @@ public class LoginView extends JFrame {
 					meldung.setVisible(true);
 				}
 				if (passwort.getText().equals(benutzer.getPasswort())) {
-					HomeView homeview = new HomeView();
+					HomeView homeview = new HomeView(benutzer);
 					homeview.setSize(1500, 900);
 					homeview.setResizable(false);
 					homeview.setVisible(true);
