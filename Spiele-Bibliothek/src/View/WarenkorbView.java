@@ -21,8 +21,8 @@ public class WarenkorbView extends viewSuperclass {
 	protected JLabel preis2 = new JLabel("Preis2");
 	protected JLabel total = new JLabel("Total");
 	protected JLabel totalPreis = new JLabel("Total Preis");
-	protected JPanel panelMitte = new JPanel(new GridLayout(1,0));
-	protected JPanel panelUnten = new JPanel(new GridLayout(1,0));
+	protected JPanel panelMitte = new JPanel(new GridLayout(1,2));
+	protected JPanel panelUnten = new JPanel(new GridLayout(1,2));
 
 	public WarenkorbView(Benutzer benutzer) {
 		setTitle("Warenkorb");
