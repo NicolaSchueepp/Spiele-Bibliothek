@@ -16,8 +16,8 @@ public class BenutzerController {
 	
 	private final BenutzerDao BENUTZER_DAO = new BenutzerJDBCDao();
 	
-	public Benutzer searchPasswortByName(String name) {
-		return BENUTZER_DAO.findPasswortByName(name);
+	public Benutzer searchUserByName(String name) {
+		return BENUTZER_DAO.findUserByName(name);
 	}
 	
 	public void registerBenutzer(Benutzer benutzer) {

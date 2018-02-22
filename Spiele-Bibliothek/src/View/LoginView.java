@@ -103,7 +103,7 @@ public class LoginView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Benutzer benutzer = null;
 				try {
-					benutzer = BenutzerController.getUserController().searchPasswortByName(benutzername.getText());
+					benutzer = BenutzerController.getUserController().searchUserByName(benutzername.getText());
 				}catch (UserNotFoundException b) {
 					meldung.setText("Benutzername / Passwort ist ungueltig!");
 					meldung.setForeground(Color.red);

@@ -13,8 +13,8 @@ public class BenutzerJDBCDao implements BenutzerDao {
 	private final Connection con = ConnectionFactory.getInstance().getConnection();
 
 	@Override
-	public Benutzer findPasswortByName(String name) {
-		final String SQL = "select passwort from benutzer where benutzername = ?";
+	public Benutzer findUserByName(String name) {
+		final String SQL = "select * from benutzer where benutzername = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Benutzer benutzer = null;
@@ -26,7 +26,10 @@ public class BenutzerJDBCDao implements BenutzerDao {
 
 			while (rs.next()) {
 				benutzer = new Benutzer();
+				benutzer.setId(rs.getInt("ID"));
+				benutzer.setBenutzername(rs.getString("Benutzername"));
 				benutzer.setPasswort(rs.getString("passwort"));
+				benutzer.setEmail(rs.getString("Email"));
 				break;
 			}
 		} catch (SQLException e) {

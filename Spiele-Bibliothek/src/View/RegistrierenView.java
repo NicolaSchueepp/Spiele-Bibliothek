@@ -25,7 +25,7 @@ public class RegistrierenView extends LoginView {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!email.getText().matches("")) {
+				if (email.getText().equals("")) {
 					meldung.setText("Invalide Email Adresse!");
 					meldung.setForeground(Color.red);
 					meldung.setVisible(true);

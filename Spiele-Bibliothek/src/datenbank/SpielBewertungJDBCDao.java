@@ -129,7 +129,6 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 				spiel.setCover(rs.getString("cover"));
 
 				alleSpiele.add(spiel);
-				break;
 			}
 
 		} catch (SQLException e) {

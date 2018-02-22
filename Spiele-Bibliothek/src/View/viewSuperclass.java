@@ -33,6 +33,7 @@ public class viewSuperclass extends JFrame {
 	protected JButton bibliothekButton = new JButton("Bibliothek");
 	protected JTextField searchField = new JTextField(20);
 	protected JPanel northPanel = new JPanel(new GridLayout(1, 0));
+	protected JButton ausloggenButton = new JButton("Ausloggen");
 	
 	public void addMainMenu(Benutzer benutzer) {
 		
@@ -48,6 +49,7 @@ public class viewSuperclass extends JFrame {
 		final JPanel northSearchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		northSearchPanel.add(searchIcon);
 		northSearchPanel.add(searchField);
+		northSearchPanel.add(ausloggenButton);
 		
 		final JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,50));
 		searchPanel.add(northSearchPanel);
@@ -75,6 +77,19 @@ public class viewSuperclass extends JFrame {
 				}
 			}
 			
+		});
+		
+		ausloggenButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LoginView loginview = new LoginView();
+				loginview.setSize(1000, 1000);
+				loginview.pack();
+				loginview.setResizable(false);
+				loginview.setVisible(true);
+				setVisible(false);
+			}
 		});
 		
 		searchField.addActionListener(new ActionListener() {
