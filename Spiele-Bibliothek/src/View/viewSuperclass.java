@@ -32,7 +32,7 @@ public class viewSuperclass extends JFrame {
 	protected JButton warenkorbButton = new JButton("Warenkorb");
 	protected JButton bibliothekButton = new JButton("Bibliothek");
 	protected JTextField searchField = new JTextField(20);
-	protected JPanel northPanel = new JPanel(new GridLayout(1, 0));
+	protected JPanel northPanel = new JPanel(new GridLayout(0, 2));
 	protected JButton ausloggenButton = new JButton("Ausloggen");
 	
 	public void addMainMenu(Benutzer benutzer) {
@@ -199,6 +199,30 @@ public class viewSuperclass extends JFrame {
 				setVisible(false);
 			}
 		});
+		
+		shopButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		
+		ausloggenButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
 	}
 	
 	public static Icon loadIcon(String iconName) {
@@ -209,5 +233,9 @@ public class viewSuperclass extends JFrame {
 			return new ImageIcon();
 		}
 		return new ImageIcon(resource);
+	}
+
+	public JPanel getNorthPanel() {
+		return northPanel;
 	}
 }

@@ -2,8 +2,6 @@ package Controller;
 
 import java.util.List;
 
-import javax.swing.JComboBox;
-
 import datenbank.SpielBewertungDao;
 import datenbank.SpielBewertungJDBCDao;
 import model.Spiel;

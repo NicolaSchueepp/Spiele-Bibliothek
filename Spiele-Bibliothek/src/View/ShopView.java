@@ -1,24 +1,20 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import Controller.SpielController;
 import model.Benutzer;
@@ -27,6 +23,10 @@ import model.Spiel;
 public class ShopView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
+	JPanel centerGamesPanel = new JPanel(new GridLayout(0, 5, 40, 40));
+	final JPanel centerSouthPanel = new JPanel();
+	final JPanel centerPanel = new JPanel(new GridLayout(1, 1));
+	final JPanel northFilteringPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 37, 0));
 	
 	List<Spiel> spiele;
 	final JComboBox<String> genreBox;
@@ -37,28 +37,47 @@ public class ShopView extends viewSuperclass {
 		addMainMenu(benutzer);
 		genreBox = new JComboBox<String>(SpielController.getGameController().getAllGenres());
 		genreBox.insertItemAt("Alle Spiele", 0);
-
-		final JPanel centerGenreBox = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		centerGenreBox.add(genreBox);
-
-		JPanel centerGamesPanel = new JPanel(new GridLayout(0, 5));
 		genreBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (genreBox.getSelectedItem().toString().equals("Alle Spiele")) {
+				if (((String)genreBox.getSelectedItem()).equals("Alle Spiele")) {
+					centerGamesPanel.removeAll();
 					spiele = SpielController.getGameController().searchAllGames();
+					addGames(benutzer, spiele);
+					repaint();
 				} else {
-					spiele = SpielController.getGameController().searchGamesByGenre(genreBox.getSelectedItem().toString());
+					centerGamesPanel.removeAll();
+					spiele = SpielController.getGameController()
+							.searchGamesByGenre((String)genreBox.getSelectedItem());
+					addGames(benutzer, spiele);
+					repaint();
 				}
 			}
 		});
 		
+		//Filter werden dem North Panel hinzugefügt
+		northFilteringPanel.add(genreBox);
+		getNorthPanel().add(northFilteringPanel);
+		
+		//ScrollPane wird erstellt
+		JScrollPane scrollPane = new JScrollPane (centerSouthPanel, 
+	            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setBorder(null);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 		genreBox.setSelectedItem("Alle Spiele");
-		int counter = 1;
-		for(Spiel spiel : spiele) {
+
+		centerSouthPanel.add(centerGamesPanel, BorderLayout.CENTER);
+
+		centerPanel.add(scrollPane);
+		add(centerPanel, BorderLayout.CENTER);
+	}
+
+	public void addGames(Benutzer benutzer, List<Spiel> spieletmp) {
+		for (Spiel spiel : spieletmp) {
 			JButton button = new JButton(loadIcon(spiel.getCover()));
-			
+
 			button.setBorder(null);
 			button.setBackground(getBackground());
 			centerGamesPanel.add(button);
@@ -85,30 +104,9 @@ public class ShopView extends viewSuperclass {
 					setVisible(false);
 				}
 			});
-			
+			repaint();
+
 		}
-//		final JScrollBar scrollBar = new JScrollBar(JScrollBar.VERTICAL, 30, 20, 0, 300);
-//		scrollBar.addAdjustmentListener(new MyAdjustmentListener());
-		
-		final JPanel centerSouthPanel = new JPanel();
-		centerSouthPanel.add(centerGamesPanel, BorderLayout.CENTER);
-//		centerSouthPanel.add(scrollBar, BorderLayout.EAST);
-		
-		final JPanel centerNorthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,50,50));
-		centerNorthPanel.add(centerGenreBox, BorderLayout.NORTH);
-		
-		final JPanel centerPanel = new JPanel();
-		centerPanel.add(centerNorthPanel, BorderLayout.NORTH);
-		centerPanel.add(centerSouthPanel, BorderLayout.CENTER);
-
-		add(centerPanel, BorderLayout.CENTER);
-
 	}
-	
-	class MyAdjustmentListener implements AdjustmentListener {
-	    public void adjustmentValueChanged(AdjustmentEvent e) {	
-	      repaint();
-	    }
-	  }
 
 }
