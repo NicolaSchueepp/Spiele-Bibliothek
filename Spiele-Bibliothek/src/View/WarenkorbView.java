@@ -1,12 +1,11 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,32 +18,40 @@ public class WarenkorbView extends viewSuperclass {
 	protected JLabel game2 = new JLabel("Game2");
 	protected JLabel preis1 = new JLabel("Preis1");
 	protected JLabel preis2 = new JLabel("Preis2");
-	protected JLabel total = new JLabel("Total");
-	protected JLabel totalPreis = new JLabel("Total Preis");
-	protected JPanel panelMitte = new JPanel(new GridLayout(1,0));
-	protected JPanel panelUnten = new JPanel(new GridLayout(1,0));
-
+	protected JLabel total = new JLabel("Total Preis");
+	protected JButton kaufen = new JButton("Kaufen");
+	protected JPanel panelMitteLinks = new JPanel(new FlowLayout(FlowLayout.LEFT, 100, 100));
+	protected JPanel panelMitteRechts = new JPanel(new FlowLayout(FlowLayout.RIGHT, 100, 100));
+	protected JPanel panelUntenLinks = new JPanel(new FlowLayout(FlowLayout.LEFT, 100, 100));
+	protected JPanel panelMitte = new JPanel(new GridLayout(1, 2));
+	protected JPanel panelUnten = new JPanel(new GridLayout(1, 2));
+	
+	
 	public WarenkorbView(Benutzer benutzer) {
 		setTitle("Warenkorb");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer);
 		
-		final JPanel listeGame = new JPanel(new FlowLayout(FlowLayout.LEFT, 100, 50));
+		final JPanel listeGame = new JPanel(new GridLayout(2, 1));
 		listeGame.add(game1);
 		listeGame.add(game2);
 		
-		final JPanel listePreis = new JPanel(new FlowLayout(FlowLayout.RIGHT, 50, 50));
+		listeGame.setFont(new Font("", 30, 30));
+		
+		final JPanel listePreis = new JPanel(new GridLayout(2, 1));
 		listePreis.add(preis1);
 		listePreis.add(preis2);
 		
-		final JPanel preis = new JPanel(new GridLayout(1, 2));
-		preis.add(total);
-		preis.add(totalPreis);
+		panelMitteLinks.add(listeGame);
+		panelMitteRechts.add(listePreis);
 		
-		panelMitte.add(listeGame);
-		panelMitte.add(listePreis);
+		panelMitte.add(panelMitteLinks);
+		panelMitte.add(panelMitteRechts);
 		
-		panelUnten.add(preis);
+		panelUntenLinks.add(total);
+		panelUntenLinks.add(kaufen);
+		
+		panelUnten.add(panelUntenLinks);
 		
 		add(panelMitte, BorderLayout.CENTER);
 		add(panelUnten, BorderLayout.SOUTH);
