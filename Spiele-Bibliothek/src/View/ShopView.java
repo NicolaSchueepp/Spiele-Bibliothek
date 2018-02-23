@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -27,14 +28,15 @@ public class ShopView extends viewSuperclass {
 	final JPanel centerSouthPanel = new JPanel();
 	final JPanel centerPanel = new JPanel(new GridLayout(1, 1));
 	final JPanel northFilteringPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 37, 0));
-	
+	List<Spiel> warenkorbtmp = new ArrayList<Spiel>();
 	List<Spiel> spiele;
 	final JComboBox<String> genreBox;
 
-	public ShopView(Benutzer benutzer) {
+	public ShopView(Benutzer benutzer, List<Spiel> warenkorb) {
+		warenkorbtmp = warenkorb;
 		setTitle("Genre");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		addMainMenu(benutzer);
+		addMainMenu(benutzer, warenkorb);
 		genreBox = new JComboBox<String>(SpielController.getGameController().getAllGenres());
 		genreBox.insertItemAt("Alle Spiele", 0);
 		genreBox.addActionListener(new ActionListener() {
@@ -97,7 +99,7 @@ public class ShopView extends viewSuperclass {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					GameView game = new GameView(benutzer, spiel);
+					GameView game = new GameView(benutzer, spiel, warenkorbtmp);
 					game.setSize(1500, 900);
 					game.setResizable(false);
 					game.setVisible(true);

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Benutzer;
 import model.Spiel;
 
 public class SpielBewertungJDBCDao implements SpielBewertungDao {
@@ -15,7 +16,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 
 	@Override
 	public List<Spiel> findTopGames() {
-		final String SQL = "Select id, bezeichnung, hersteller, preis, erscheinungsjahr, genre, beschreibung, cover from (select Bewertung as bewertung, Game.ID as id, Game.Bezeichnung as bezeichnung, Game.Hersteller as hersteller, Game.Preis as preis, Game.Erscheinungsjahr as erscheinungsjahr, Game.Genre as genre, Game.Beschreibung as beschreibung, Game.Cover as cover from bewertung join Game on Bewertung.Game_ID=Game.ID ORDER BY Bewertung DESC LIMIT 4)T";
+		final String SQL = "Select id, bezeichnung, hersteller, preis, erscheinungsjahr, genre, beschreibung, cover from (select AVG(Bewertung) as bewertung, Game.ID as id, Game.Bezeichnung as bezeichnung, Game.Hersteller as hersteller, Game.Preis as preis, Game.Erscheinungsjahr as erscheinungsjahr, Game.Genre as genre, Game.Beschreibung as beschreibung, Game.Cover as cover  from bewertung  join Game on Bewertung.Game_ID=Game.ID  group BY Game_ID order by bewertung DESC LIMIT 4)T";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Spiel> topSpiele = new ArrayList<Spiel>();
@@ -84,7 +85,6 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 				spieltmp.setCover(rs.getString("cover"));
 
 				spiele.add(spieltmp);
-				break;
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Oh oh", e);
@@ -185,6 +185,31 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 		}
 		
 		return genres;
+	}
+
+	@Override
+	public void addBewertung(Benutzer benutzer, Spiel spiel, int bewertung) {
+		final String SQL = "insert into bewertung (Game_ID, Benutzer_ID, Bewertung) Values(?, ?, ?)";
+		Connection con = ConnectionFactory.getInstance().getConnection();
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(SQL);
+			ps.setInt(1, spiel.getId());
+			ps.setInt(2, benutzer.getId());
+			ps.setInt(3, bewertung);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

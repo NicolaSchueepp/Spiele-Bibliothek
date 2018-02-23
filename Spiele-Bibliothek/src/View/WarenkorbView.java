@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Benutzer;
+import model.Spiel;
 
 public class WarenkorbView extends viewSuperclass {
 	
@@ -27,10 +29,10 @@ public class WarenkorbView extends viewSuperclass {
 	protected JPanel panelUnten = new JPanel(new GridLayout(1, 2));
 	
 	
-	public WarenkorbView(Benutzer benutzer) {
+	public WarenkorbView(Benutzer benutzer, List<Spiel> warenkorb) {
 		setTitle("Warenkorb");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		addMainMenu(benutzer);
+		addMainMenu(benutzer, warenkorb);
 		
 		final JPanel listeGame = new JPanel(new GridLayout(2, 1));
 		listeGame.add(game1);
@@ -56,6 +58,7 @@ public class WarenkorbView extends viewSuperclass {
 		add(panelMitte, BorderLayout.CENTER);
 		add(panelUnten, BorderLayout.SOUTH);
 		
+		System.out.println(warenkorb);
 	}
 
 }

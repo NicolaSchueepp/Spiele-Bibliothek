@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import model.Benutzer;
+import model.Spiel;
 
 public class BibliothekView extends viewSuperclass {
 
@@ -26,10 +28,10 @@ public class BibliothekView extends viewSuperclass {
 	private JLabel assasinsCreedText = new JLabel("TEXT");
 	private JLabel codText = new JLabel("TEXT2");
 
-	public BibliothekView(Benutzer benutzer) {
+	public BibliothekView(Benutzer benutzer, List<Spiel> warenkorb) {
 		setTitle("Bibliothek");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		addMainMenu(benutzer);
+		addMainMenu(benutzer, warenkorb);
 		
 		final JPanel images = new JPanel(new GridLayout(2, 1));
 		images.add(assasinsCreed);
@@ -58,12 +60,6 @@ public class BibliothekView extends viewSuperclass {
 				repaint();
 			}
 			
-			@Override
-			  protected void paintComponent(Graphics g) {
-
-			    super.paintComponent(g);
-			        g.drawImage(bgImage, 0, 0, null);
-			}
 		});
 		
 
@@ -74,4 +70,10 @@ public class BibliothekView extends viewSuperclass {
 		
 		
 	}
+//	@Override
+//	  protected void paintComponent(Graphics g) {
+//
+//	    super.paintComponent(g);
+//	        g.drawImage(bgImage, 0, 0, null);
+//	}
 }

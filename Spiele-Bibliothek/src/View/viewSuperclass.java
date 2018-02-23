@@ -12,6 +12,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -22,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Benutzer;
+import model.Spiel;
 
 public class viewSuperclass extends JFrame {
 
@@ -35,7 +38,7 @@ public class viewSuperclass extends JFrame {
 	protected JPanel northPanel = new JPanel(new GridLayout(0, 2));
 	protected JButton ausloggenButton = new JButton("Ausloggen");
 	
-	public void addMainMenu(Benutzer benutzer) {
+	public void addMainMenu(Benutzer benutzer, List<Spiel> warenkorb) {
 		
 		final JPanel buttonNavigation = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		buttonNavigation.add(homeButton);
@@ -59,7 +62,7 @@ public class viewSuperclass extends JFrame {
 		add(northPanel, BorderLayout.NORTH);
 		
 		searchField.setText("Suchen");
-		searchField.setFont(new Font("Open Sans", 15, 15));
+		searchField.setFont(new Font("Open Sans", 0, 15));
 		searchField.addFocusListener(new FocusListener() {
 
 			@Override
@@ -88,6 +91,7 @@ public class viewSuperclass extends JFrame {
 				loginview.pack();
 				loginview.setResizable(false);
 				loginview.setVisible(true);
+				loginview.setLocation(getLocation());
 				setVisible(false);
 			}
 		});
@@ -96,26 +100,28 @@ public class viewSuperclass extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ShopView shopView = new ShopView(benutzer);
+				ShopView shopView = new ShopView(benutzer, warenkorb);
 				shopView.setSize(1500, 900);
 				shopView.setResizable(false);
 				shopView.setVisible(true);
+				shopView.setLocation(getLocation());
 				setVisible(false);
 			}
 		});
-		homeButton.setFont(new Font("Open Sans", 15, 15));
+		homeButton.setFont(new Font("Open Sans", 0, 15));
 		homeButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HomeView homeview = new HomeView(benutzer);
+				HomeView homeview = new HomeView(benutzer, warenkorb);
 				homeview.setSize(1500, 900);
 				homeview.setResizable(false);
 				homeview.setVisible(true);
+				homeview.setLocation(getLocation());
 				setVisible(false);
 			}
 		});
-		shopButton.setFont(new Font("Open Sans", 15, 15));
+		shopButton.setFont(new Font("Open Sans", 0, 15));
 		shopButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -127,7 +133,7 @@ public class viewSuperclass extends JFrame {
 				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
-		warenkorbButton.setFont(new Font("Open Sans", 15, 15));
+		warenkorbButton.setFont(new Font("Open Sans", 0, 15));
 		warenkorbButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -139,7 +145,7 @@ public class viewSuperclass extends JFrame {
 				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
-		bibliothekButton.setFont(new Font("Open Sans", 15, 15));
+		bibliothekButton.setFont(new Font("Open Sans", 0, 15));
 		bibliothekButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -168,10 +174,11 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ShopView shopView = new ShopView(benutzer);
+				ShopView shopView = new ShopView(benutzer, warenkorb);
 				shopView.setSize(1500, 900);
 				shopView.setResizable(false);
 				shopView.setVisible(true);
+				shopView.setLocation(getLocation());
 				setVisible(false);
 			}
 		});
@@ -180,10 +187,11 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				WarenkorbView warenkorbview = new WarenkorbView(benutzer);
+				WarenkorbView warenkorbview = new WarenkorbView(benutzer, warenkorb);
 				warenkorbview.setSize(1500, 900);
 				warenkorbview.setResizable(false);
 				warenkorbview.setVisible(true);
+				warenkorbview.setLocation(getLocation());
 				setVisible(false);
 			}
 		});
@@ -192,10 +200,11 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BibliothekView bibliothekView = new BibliothekView(benutzer);
+				BibliothekView bibliothekView = new BibliothekView(benutzer, warenkorb);
 				bibliothekView.setSize(1500, 900);
 				bibliothekView.setResizable(false);
 				bibliothekView.setVisible(true);
+				bibliothekView.setLocation(getLocation());
 				setVisible(false);
 			}
 		});
@@ -211,7 +220,7 @@ public class viewSuperclass extends JFrame {
 				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
-		
+		ausloggenButton.setFont(new Font("Open Sans", 0, 15));
 		ausloggenButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {

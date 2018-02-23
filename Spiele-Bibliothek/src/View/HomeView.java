@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -24,18 +25,18 @@ public class HomeView extends viewSuperclass {
 	private static final long serialVersionUID = 4724085734802179441L;
 	protected JPanel centerPanel = new JPanel(new GridLayout(2, 1));
 	protected JTextArea textArea = new JTextArea(5, 10);
-
+	
 	public static void main(String[] args) {
-		HomeView gui = new HomeView(null);
+		HomeView gui = new HomeView(null, null);
 		gui.setSize(1500, 900);
 		gui.setResizable(false);
 		gui.setVisible(true);
 	}
 
-	public HomeView(Benutzer benutzer) {
+	public HomeView(Benutzer benutzer, List<Spiel> warenkorb) {
 		setTitle("Home");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		addMainMenu(benutzer);
+		addMainMenu(benutzer, warenkorb);
 		textArea.setEditable(false);
 		textArea.setBackground(getBackground());
 		textArea.setText(
@@ -101,7 +102,7 @@ public class HomeView extends viewSuperclass {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					GameView game = new GameView(benutzer, spiel);
+					GameView game = new GameView(benutzer, spiel, warenkorb);
 					game.setSize(1500, 900);
 					game.setResizable(false);
 					game.setVisible(true);

@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -21,6 +23,7 @@ import javax.swing.JTextField;
 import Controller.BenutzerController;
 import exception.UserNotFoundException;
 import model.Benutzer;
+import model.Spiel;
 
 public class LoginView extends JFrame {
 
@@ -85,16 +88,6 @@ public class LoginView extends JFrame {
 			}
 		});
 
-
-		login.addKeyListener(new KeyAdapter(){
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
 		// Login
 		login.addActionListener(new ActionListener() {
 
@@ -110,7 +103,8 @@ public class LoginView extends JFrame {
 					meldung.setVisible(true);
 				}
 				if (passwort.getText().equals(benutzer.getPasswort())) {
-					HomeView homeview = new HomeView(benutzer);
+					List<Spiel> warenkorb = new ArrayList<Spiel>();
+					HomeView homeview = new HomeView(benutzer, warenkorb);
 					homeview.setSize(1500, 900);
 					homeview.setResizable(false);
 					homeview.setVisible(true);
