@@ -3,6 +3,8 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,14 +30,17 @@ public class BibliothekView extends viewSuperclass {
 		setTitle("Bibliothek");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer);
-	
-		final JPanel images = new JPanel(new GridLayout(1, 1));
-		images.add(cod);
-		images.add(assasinsCreed);
-		images.add(download);
 		
-//		final JPanel downloads = new JPanel(new GridLayout(1, 1));
-//		downloads.add(download);
+		final JPanel images = new JPanel(new GridLayout(2, 1));
+		images.add(assasinsCreed);
+		
+		final JPanel game = new JPanel(new GridLayout(1, 1));
+		game.add(cod);
+		game.add(download);
+		
+		final JPanel view = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		view.add(game);
+		view.add(images);
 		
 		download.setVisible(false);
 
@@ -52,12 +57,19 @@ public class BibliothekView extends viewSuperclass {
 				download.setVisible(true);
 				repaint();
 			}
+			
+			@Override
+			  protected void paintComponent(Graphics g) {
+
+			    super.paintComponent(g);
+			        g.drawImage(bgImage, 0, 0, null);
+			}
 		});
+		
+
 
 		
-		
-		add(images, BorderLayout.CENTER);
-//		add(downloads, BorderLayout.SOUTH);
+		add(view, BorderLayout.CENTER);
 		
 		
 		
