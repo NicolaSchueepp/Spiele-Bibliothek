@@ -4,6 +4,8 @@ import java.util.List;
 
 import datenbank.SpielBewertungDao;
 import datenbank.SpielBewertungJDBCDao;
+import model.Benutzer;
+import model.Bewertung;
 import model.Spiel;
 
 public class SpielController {
@@ -32,5 +34,13 @@ public class SpielController {
 	
 	public String[] getAllGenres() {
 		return SPIELBEWERTUNG_DAO.getAllGenres();
+	}
+	
+	public List<Bewertung> searchAllBewertungenbyID(int id) {
+		return SPIELBEWERTUNG_DAO.getAllBewertungenbyID(id);
+	}
+	
+	public void addBewertung(Benutzer benutzer, Spiel game ,int bewertung) {
+		SPIELBEWERTUNG_DAO.addBewertung(benutzer, game, bewertung);
 	}
 }

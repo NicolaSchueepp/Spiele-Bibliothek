@@ -107,6 +107,7 @@ public class ShopView extends viewSuperclass {
 				}
 			});
 			repaint();
+			System.out.println("repaint");
 
 		}
 	}

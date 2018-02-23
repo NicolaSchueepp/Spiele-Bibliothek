@@ -61,7 +61,7 @@ public class HomeView extends viewSuperclass {
 						+ "t, sed diam voluptua. At vero eos et accusam et justo duo"
 						+ " dolores et ea rebum. Stet clita kasd gubergren, no se"
 						+ "a takimata sanctus est Lorem ipsum dolor sit amet.");
-		for (int i = 150; i < textArea.getText().length(); i += 150) {
+		for (int i = 170; i < textArea.getText().length(); i += 170) {
 			textArea.insert("\n", i);
 		}
 

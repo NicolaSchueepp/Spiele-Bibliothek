@@ -21,8 +21,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
+import javax.swing.plaf.BorderUIResource;
 
+import Controller.SpielController;
 import model.Benutzer;
+import model.Bewertung;
 import model.Spiel;
 
 public class GameView extends viewSuperclass {
@@ -39,6 +42,7 @@ public class GameView extends viewSuperclass {
 		addMainMenu(benutzer, warenkorb);
 
 		JPanel leftPanel = new JPanel(new GridLayout(2, 1,0,0));
+		leftPanel.setAlignmentX(CENTER_ALIGNMENT);
 		JPanel leftTopPanel = new JPanel();
 		leftTopPanel.setLayout(new BoxLayout(leftTopPanel,BoxLayout.Y_AXIS));
 		gameName.setText(spiel.getBezeichnung());
@@ -55,12 +59,12 @@ public class GameView extends viewSuperclass {
 		leftPanel.add(leftBottomPanel);
 
 		JPanel rightPanel = new JPanel(new GridLayout(2, 1, 0,0));
-		JPanel rightBottomPanel = new JPanel(new GridLayout(2,1,0,0));
-		JPanel rightBottomTopPanel = new JPanel();
+		JPanel rightBottomPanel = new JPanel(new BorderLayout());
+		JPanel rightBottomTopPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JPanel rightBottomBottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		rightBottomTopPanel.setLayout(new BoxLayout(rightBottomTopPanel, BoxLayout.X_AXIS));
-		rightBottomPanel.add(rightBottomTopPanel);
-		rightBottomPanel.add(rightBottomBottomPanel);
+		rightBottomPanel.add(rightBottomTopPanel, BorderLayout.NORTH);
+		rightBottomPanel.add(rightBottomBottomPanel, BorderLayout.CENTER);
 
 		JComboBox<Integer> combobox = new JComboBox<Integer>();
 		for (int i = 1; i<6; i++) {
@@ -82,6 +86,7 @@ public class GameView extends viewSuperclass {
 		for (int i = 110; i < spielBeschreibung.getText().length(); i += 110) {
 			spielBeschreibung.insert("\n", i);
 		}
+		spielBeschreibung.setEditable(false);
 		
 		JScrollPane scrollPane = new JScrollPane(spielBeschreibung, 
 	            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -107,12 +112,21 @@ public class GameView extends viewSuperclass {
 			public void actionPerformed(ActionEvent e) {
 				if(warenkorb.contains(spiel)) {
 					JDialog fenster = new JDialog();
-					fenster.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
+					fenster.setLayout(new GridLayout(2, 1,100,0));
 					fenster.setSize(1000, 1000);
 					
 					JLabel text = new JLabel("Spiel ist bereits im Warenkorb");
+					JButton schliessen = new JButton("Schliessen");
+					schliessen.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							fenster.setVisible(false);
+						}
+					});
 					
-					fenster.add(text);
+					fenster.add(text, BorderLayout.CENTER);
+					fenster.add(schliessen, BorderLayout.SOUTH);
 					fenster.pack();
 					fenster.setVisible(true);
 					fenster.setLocationRelativeTo(null);
@@ -127,6 +141,34 @@ public class GameView extends viewSuperclass {
 					JButton weiterEinkaufen = new JButton("Weiter einkaufen");
 					JButton zumWarenkorb = new JButton("Zum Warenkorb");
 					
+					weiterEinkaufen.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							ShopView warenkorbView = new ShopView(benutzer, warenkorb);
+							warenkorbView.setSize(1500, 900);
+							warenkorbView.setResizable(false);
+							warenkorbView.setVisible(true);
+							warenkorbView.setLocation(getLocation());
+							fenster.setVisible(false);
+							setVisible(false);
+						}
+					});
+					
+					zumWarenkorb.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							WarenkorbView warenkorbView = new WarenkorbView(benutzer, warenkorb);
+							warenkorbView.setSize(1500, 900);
+							warenkorbView.setResizable(false);
+							warenkorbView.setVisible(true);
+							warenkorbView.setLocation(getLocation());
+							fenster.setVisible(false);
+							setVisible(false);
+						}
+					});
+					
 					JPanel top = new JPanel(new FlowLayout(FlowLayout.CENTER));
 					JPanel bottom = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 50));
 					
@@ -140,6 +182,64 @@ public class GameView extends viewSuperclass {
 					fenster.pack();
 					fenster.setVisible(true);
 					
+					fenster.setLocationRelativeTo(null);
+				}
+			}
+			
+		});
+		
+		bewertungSenden.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean schonvorhanden = false;
+				List<Bewertung> bewertungen = SpielController.getGameController().searchAllBewertungenbyID(spiel.getId());
+				for (Bewertung bewertung : bewertungen) {
+					if(bewertung.getBenutzer_ID() == benutzer.getId()) {
+						schonvorhanden = true;
+					}
+				}
+				if(schonvorhanden) {
+					JDialog fenster = new JDialog();
+					fenster.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
+					fenster.setSize(1000, 1000);
+					
+					JLabel text = new JLabel("Spiel wurde schon bewertet!");
+					JButton schliessen = new JButton("Schliessen");
+					schliessen.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							fenster.setVisible(false);
+						}
+					});
+					
+					fenster.add(text, BorderLayout.CENTER);
+					fenster.add(schliessen, BorderLayout.SOUTH);
+					fenster.pack();
+					fenster.setVisible(true);
+					fenster.setLocationRelativeTo(null);
+				}else{
+					SpielController.getGameController().addBewertung(benutzer, spiel, combobox.getSelectedIndex());
+					
+					JDialog fenster = new JDialog();
+					fenster.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
+					fenster.setSize(1000, 1000);
+					
+					JLabel text = new JLabel("Bewertung gesendet\nDanke für die Bewertung!");
+					JButton schliessen = new JButton("Schliessen");
+					schliessen.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							fenster.setVisible(false);
+						}
+					});
+					
+					fenster.add(text, BorderLayout.CENTER);
+					fenster.add(schliessen, BorderLayout.SOUTH);
+					fenster.pack();
+					fenster.setVisible(true);
 					fenster.setLocationRelativeTo(null);
 				}
 			}
