@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Benutzer;
+import model.Bewertung;
 import model.Spiel;
 
 public class SpielBewertungJDBCDao implements SpielBewertungDao {
@@ -60,13 +61,12 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 		return topSpiele;
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public List<Spiel> findGamesByGenre(String genre) {
 		final String SQL = "select * from Game where Genre = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<Spiel> spiele = null;
+		List<Spiel> spiele = new ArrayList<Spiel>();
 
 		try {
 			ps = con.prepareStatement(SQL);
@@ -154,11 +154,11 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<String> genrestmp = new ArrayList<String>();
-		
+
 		try {
 			ps = con.prepareStatement(SQL);
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				String genre = new String();
 				genre = rs.getString("genre");
@@ -180,10 +180,10 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 			}
 		}
 		String[] genres = genrestmp.toArray(new String[genrestmp.size()]);
-		for(int i = 0; i < genrestmp.size();i++) {
+		for (int i = 0; i < genrestmp.size(); i++) {
 			genres[i] = genrestmp.get(i);
 		}
-		
+
 		return genres;
 	}
 
@@ -198,7 +198,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 			ps.setInt(2, benutzer.getId());
 			ps.setInt(3, bewertung);
 			ps.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -210,6 +210,44 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 				e.printStackTrace();
 			}
 		}
+	}
+	@Override
+	public List<Bewertung> getAllBewertungenbyID(int spiel_ID) {
+		final String SQL = "select * from bewertung where Game_ID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Bewertung> bewertungList = new ArrayList<Bewertung>();
+
+		try {
+			ps = con.prepareStatement(SQL);
+			ps.setInt(1, spiel_ID);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Bewertung bewertung = new Bewertung();
+				bewertung.setGame_ID(rs.getInt("Game_ID"));
+				bewertung.setBenutzer_ID(rs.getInt("Benutzer_ID"));
+				bewertung.setBewertung(rs.getInt("Bewertung"));
+				
+				bewertungList.add(bewertung);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Oh oh", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Oh oh", e);
+			}
+		}
+		return bewertungList;
+
 	}
 
 }

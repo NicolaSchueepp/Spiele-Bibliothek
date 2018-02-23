@@ -5,7 +5,7 @@ public class Benutzer {
 	private String benutzername = "";
 	private String passwort = "";
 	private String email = "";
-	
+
 	public int getId() {
 		return id;
 	}

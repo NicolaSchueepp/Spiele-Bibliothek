@@ -13,12 +13,14 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 
 import model.Benutzer;
 import model.Spiel;
@@ -103,13 +105,43 @@ public class GameView extends viewSuperclass {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for(Spiel spieltmp : warenkorb) {
-					if(spieltmp) {
-						
-					}
+				if(warenkorb.contains(spiel)) {
+					JDialog fenster = new JDialog();
+					fenster.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
+					fenster.setSize(1000, 1000);
+					
+					JLabel text = new JLabel("Spiel ist bereits im Warenkorb");
+					
+					fenster.add(text);
+					fenster.pack();
+					fenster.setVisible(true);
+					fenster.setLocationRelativeTo(null);
+					
+				}else {
+					warenkorb.add(spiel);
+					
+					JDialog fenster = new JDialog();
+					fenster.setSize(1000, 1000);
+					
+					JLabel text = new JLabel("Spiel zum Warenkorb hinzugefügt...\nMöchten Sie weiter einkaufen?");
+					JButton weiterEinkaufen = new JButton("Weiter einkaufen");
+					JButton zumWarenkorb = new JButton("Zum Warenkorb");
+					
+					JPanel top = new JPanel(new FlowLayout(FlowLayout.CENTER));
+					JPanel bottom = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 50));
+					
+					top.add(text);
+					bottom.add(weiterEinkaufen);
+					bottom.add(zumWarenkorb);
+					
+					fenster.add(top, BorderLayout.NORTH);
+					fenster.add(bottom, BorderLayout.CENTER);
+					
+					fenster.pack();
+					fenster.setVisible(true);
+					
+					fenster.setLocationRelativeTo(null);
 				}
-				warenkorb.add(spiel);
-				
 			}
 		});
 	}

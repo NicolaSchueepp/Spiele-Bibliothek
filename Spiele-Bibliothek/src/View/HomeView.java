@@ -106,6 +106,7 @@ public class HomeView extends viewSuperclass {
 					game.setSize(1500, 900);
 					game.setResizable(false);
 					game.setVisible(true);
+					game.setLocation(getLocation());
 					setVisible(false);
 				}
 			});

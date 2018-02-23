@@ -55,7 +55,7 @@ public class LoginView extends JFrame {
 	public LoginView() {
 		printMainLogin();
 		getRootPane().setDefaultButton(login);
-		
+
 		JPanel loginLabelPanel = new JPanel(new GridLayout(0, 1));
 		loginLabelPanel.add(benutzernameT);
 		loginLabelPanel.add(passwortT);
@@ -84,6 +84,7 @@ public class LoginView extends JFrame {
 				regist.setResizable(false);
 				regist.setVisible(true);
 				meldung.setVisible(false);
+				regist.setLocation(getLocation());
 				setVisible(false);
 			}
 		});
@@ -97,7 +98,7 @@ public class LoginView extends JFrame {
 				Benutzer benutzer = null;
 				try {
 					benutzer = BenutzerController.getUserController().searchUserByName(benutzername.getText());
-				}catch (UserNotFoundException b) {
+				} catch (UserNotFoundException b) {
 					meldung.setText("Benutzername / Passwort ist ungueltig!");
 					meldung.setForeground(Color.red);
 					meldung.setVisible(true);
@@ -109,6 +110,7 @@ public class LoginView extends JFrame {
 					homeview.setResizable(false);
 					homeview.setVisible(true);
 					meldung.setVisible(false);
+					homeview.setLocation(getLocation());
 					setVisible(false);
 				} else {
 					meldung.setText("Benutzername / Passwort ist ungueltig!");
