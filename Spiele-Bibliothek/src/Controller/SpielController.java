@@ -7,6 +7,7 @@ import datenbank.SpielBewertungJDBCDao;
 import model.Benutzer;
 import model.Bewertung;
 import model.Spiel;
+import model.spieleliste;
 
 public class SpielController {
 	private static final SpielController GAME_CONTROLLER = new SpielController();
@@ -42,5 +43,17 @@ public class SpielController {
 	
 	public void addBewertung(Benutzer benutzer, Spiel game ,int bewertung) {
 		SPIELBEWERTUNG_DAO.addBewertung(benutzer, game, bewertung);
+	}
+	
+	public List<spieleliste> getAlleKäufe() {
+		return SPIELBEWERTUNG_DAO.getAlleKäufe();
+	}
+	
+	public void addKauf(spieleliste spieleliste) {
+		SPIELBEWERTUNG_DAO.addKauf(spieleliste);
+	}
+	
+	public List<Spiel> getKäufeByUser(int id) {
+		return SPIELBEWERTUNG_DAO.getKäufeByUser(id);
 	}
 }

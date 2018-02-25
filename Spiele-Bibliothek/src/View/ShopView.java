@@ -28,6 +28,7 @@ public class ShopView extends viewSuperclass {
 	final JPanel centerSouthPanel = new JPanel();
 	final JPanel centerPanel = new JPanel(new GridLayout(1, 1));
 	final JPanel northFilteringPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 37, 0));
+	JScrollPane scrollPane;
 	List<Spiel> warenkorbtmp = new ArrayList<Spiel>();
 	List<Spiel> spiele;
 	final JComboBox<String> genreBox;
@@ -47,13 +48,13 @@ public class ShopView extends viewSuperclass {
 					centerGamesPanel.removeAll();
 					spiele = SpielController.getGameController().searchAllGames();
 					addGames(benutzer, spiele);
-					repaint();
+					scrollPane.revalidate();
 				} else {
 					centerGamesPanel.removeAll();
 					spiele = SpielController.getGameController()
 							.searchGamesByGenre((String)genreBox.getSelectedItem());
 					addGames(benutzer, spiele);
-					repaint();
+					scrollPane.revalidate();
 				}
 			}
 		});
@@ -63,7 +64,7 @@ public class ShopView extends viewSuperclass {
 		getNorthPanel().add(northFilteringPanel);
 		
 		//ScrollPane wird erstellt
-		JScrollPane scrollPane = new JScrollPane (centerSouthPanel, 
+		scrollPane = new JScrollPane (centerSouthPanel, 
 	            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setBorder(null);

@@ -10,6 +10,7 @@ import java.util.List;
 import model.Benutzer;
 import model.Bewertung;
 import model.Spiel;
+import model.spieleliste;
 
 public class SpielBewertungJDBCDao implements SpielBewertungDao {
 
@@ -248,6 +249,146 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 		}
 		return bewertungList;
 
+	}
+
+	@Override
+	public List<spieleliste> getAlleKäufe() {
+		final String SQL = "select * from spieleliste";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<spieleliste> spielelisteList = new ArrayList<spieleliste>();
+
+		try {
+			ps = con.prepareStatement(SQL);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				spieleliste spieleliste = new spieleliste();
+				
+				spieleliste.setBenutzer_ID(rs.getInt("Benutzer_ID"));
+				spieleliste.setGame_ID(rs.getInt("Game_ID"));
+				
+				spielelisteList.add(spieleliste);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Oh oh", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Oh oh", e);
+			}
+		}
+		return spielelisteList;
+	}
+
+	@Override
+	public void addKauf(spieleliste spieleliste) {
+		final String SQL = "insert into spieleliste (Benutzer_ID, Game_ID) Values(?, ?)";
+		Connection con = ConnectionFactory.getInstance().getConnection();
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(SQL);
+			ps.setInt(1, spieleliste.getBenutzer_ID());
+			ps.setInt(2, spieleliste.getGame_ID());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public List<Spiel> getKäufeByUser(int userid) {
+		final String SQL = "select Distinct(Game_ID) from spieleliste where Benutzer_ID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Spiel> spielelisteList = new ArrayList<Spiel>();
+
+		try {
+			ps = con.prepareStatement(SQL);
+			ps.setInt(1, userid);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				for(Spiel spiel : getSpielByID(userid)) {
+					spielelisteList.add(spiel);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Oh oh", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Oh oh", e);
+			}
+		}
+		return spielelisteList;
+	}
+
+	@Override
+	public List<Spiel> getSpielByID(int userid) {
+		final String SQL = "select * from Game where ID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Spiel> spieleliste = new ArrayList<Spiel>();
+
+		try {
+			ps = con.prepareStatement(SQL);
+			ps.setInt(1, userid);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Spiel spiel = new Spiel();
+				
+				spiel.setId(rs.getInt("id"));
+				spiel.setBezeichnung(rs.getString("bezeichnung"));
+				spiel.setHersteller(rs.getString("Hersteller"));
+				spiel.setPreis(rs.getFloat("preis"));
+				spiel.setErscheinungsjahr(rs.getInt("erscheinungsjahr"));
+				spiel.setGenre(rs.getString("genre"));
+				spiel.setBeschreibung(rs.getString("beschreibung"));
+				spiel.setCover(rs.getString("cover"));
+				
+				spieleliste.add(spiel);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Oh oh", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Oh oh", e);
+			}
+		}
+		return spieleliste;
 	}
 
 }

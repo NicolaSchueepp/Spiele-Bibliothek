@@ -5,6 +5,7 @@ import java.util.List;
 import model.Benutzer;
 import model.Bewertung;
 import model.Spiel;
+import model.spieleliste;
 
 public interface SpielBewertungDao {
 	public abstract List<Spiel> findTopGames();
@@ -18,4 +19,12 @@ public interface SpielBewertungDao {
 	public abstract void addBewertung(Benutzer benutzer, Spiel spiel, int bewertung);
 
 	public abstract List<Bewertung> getAllBewertungenbyID(int spielID);
+	
+	public abstract List<spieleliste> getAlleKäufe();
+	
+	public abstract void addKauf(spieleliste spieleliste);
+	
+	public abstract List<Spiel> getSpielByID(int userid);
+
+	public abstract List<Spiel> getKäufeByUser(int userid);
 }

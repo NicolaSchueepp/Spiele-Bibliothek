@@ -26,13 +26,6 @@ public class HomeView extends viewSuperclass {
 	protected JPanel centerPanel = new JPanel(new GridLayout(2, 1));
 	protected JTextArea textArea = new JTextArea(5, 10);
 	
-	public static void main(String[] args) {
-		HomeView gui = new HomeView(null, null);
-		gui.setSize(1500, 900);
-		gui.setResizable(false);
-		gui.setVisible(true);
-	}
-
 	public HomeView(Benutzer benutzer, List<Spiel> warenkorb) {
 		setTitle("Home");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
