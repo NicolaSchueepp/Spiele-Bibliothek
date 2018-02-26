@@ -82,6 +82,8 @@ public class WarenkorbView extends viewSuperclass {
 								fenster.setVisible(false);
 								weiterfahren = true;
 								warenkorb.remove(spiel);
+								revalidate();
+								repaint();
 							}
 						});
 						

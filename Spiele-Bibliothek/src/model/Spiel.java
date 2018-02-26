@@ -9,6 +9,7 @@ public class Spiel {
 	private String genre = "";
 	private String beschreibung = "";
 	private String cover = "";
+	private String video = "";
 	
 	public int getId() {
 		return id;
@@ -57,6 +58,12 @@ public class Spiel {
 	}
 	public void setCover(String cover) {
 		this.cover = cover;
+	}
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
 	}
 	
 	

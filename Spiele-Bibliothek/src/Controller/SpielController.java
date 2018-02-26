@@ -56,4 +56,8 @@ public class SpielController {
 	public List<Spiel> getKäufeByUser(int id) {
 		return SPIELBEWERTUNG_DAO.getKäufeByUser(id);
 	}
+	
+	public List<Spiel> getGamesByName(String gamename){
+		return SPIELBEWERTUNG_DAO.getGamesByName(gamename);
+	}
 }

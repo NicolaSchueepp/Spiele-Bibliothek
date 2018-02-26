@@ -18,7 +18,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 
 	@Override
 	public List<Spiel> findTopGames() {
-		final String SQL = "Select id, bezeichnung, hersteller, preis, erscheinungsjahr, genre, beschreibung, cover from (select AVG(Bewertung) as bewertung, Game.ID as id, Game.Bezeichnung as bezeichnung, Game.Hersteller as hersteller, Game.Preis as preis, Game.Erscheinungsjahr as erscheinungsjahr, Game.Genre as genre, Game.Beschreibung as beschreibung, Game.Cover as cover  from bewertung  join Game on Bewertung.Game_ID=Game.ID  group BY Game_ID order by bewertung DESC LIMIT 4)T";
+		final String SQL = "Select id, bezeichnung, hersteller, preis, erscheinungsjahr, genre, beschreibung, cover, video from (select AVG(Bewertung) as bewertung, Game.ID as id, Game.Bezeichnung as bezeichnung, Game.Hersteller as hersteller, Game.Preis as preis, Game.Erscheinungsjahr as erscheinungsjahr, Game.Genre as genre, Game.Beschreibung as beschreibung, Game.Cover as cover, Game.Video as video from bewertung  join Game on Bewertung.Game_ID=Game.ID  group BY Game_ID order by bewertung DESC LIMIT 4)T";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Spiel> topSpiele = new ArrayList<Spiel>();
@@ -38,6 +38,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 					spiel.setGenre(rs.getString("genre"));
 					spiel.setBeschreibung(rs.getString("beschreibung"));
 					spiel.setCover(rs.getString("cover"));
+					spiel.setVideo(rs.getString("video"));
 
 					topSpiele.add(spiel);
 					break;
@@ -84,6 +85,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 				spieltmp.setGenre(rs.getString("genre"));
 				spieltmp.setBeschreibung(rs.getString("beschreibung"));
 				spieltmp.setCover(rs.getString("cover"));
+				spieltmp.setVideo(rs.getString("video"));
 
 				spiele.add(spieltmp);
 			}
@@ -126,7 +128,8 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 				spiel.setGenre(rs.getString("genre"));
 				spiel.setBeschreibung(rs.getString("beschreibung"));
 				spiel.setCover(rs.getString("cover"));
-
+				spiel.setVideo(rs.getString("video"));
+				
 				alleSpiele.add(spiel);
 			}
 
@@ -325,7 +328,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				for(Spiel spiel : getSpielByID(userid)) {
+				for(Spiel spiel : getSpielByID(rs.getInt("Game_ID"))) {
 					spielelisteList.add(spiel);
 				}
 			}
@@ -370,6 +373,53 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 				spiel.setGenre(rs.getString("genre"));
 				spiel.setBeschreibung(rs.getString("beschreibung"));
 				spiel.setCover(rs.getString("cover"));
+				spiel.setVideo(rs.getString("video"));
+				
+				spieleliste.add(spiel);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Oh oh", e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Oh oh", e);
+			}
+		}
+		return spieleliste;
+	}
+
+	@Override
+	public List<Spiel> getGamesByName(String gamename) {
+		final String SQL = "select * from Game where bezeichnung like ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Spiel> spieleliste = new ArrayList<Spiel>();
+		
+		
+		try {
+			ps = con.prepareStatement(SQL);
+			ps.setString(1, gamename+"%");
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Spiel spiel = new Spiel();
+				
+				spiel.setId(rs.getInt("id"));
+				spiel.setBezeichnung(rs.getString("bezeichnung"));
+				spiel.setHersteller(rs.getString("Hersteller"));
+				spiel.setPreis(rs.getFloat("preis"));
+				spiel.setErscheinungsjahr(rs.getInt("erscheinungsjahr"));
+				spiel.setGenre(rs.getString("genre"));
+				spiel.setBeschreibung(rs.getString("beschreibung"));
+				spiel.setCover(rs.getString("cover"));
+				spiel.setVideo(rs.getString("video"));
 				
 				spieleliste.add(spiel);
 			}

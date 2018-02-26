@@ -11,6 +11,7 @@ Erscheinungsjahr int not null,
 Genre varchar(45) not null,
 Beschreibung text not null,
 Cover varchar(85),
+Video varchar(85),
 primary key(ID)
 );
 

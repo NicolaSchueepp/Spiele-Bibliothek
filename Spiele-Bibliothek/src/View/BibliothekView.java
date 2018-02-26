@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -23,21 +25,21 @@ import model.Spiel;
 public class BibliothekView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
-	private JButton download = new JButton("Download");
 
 	public BibliothekView(Benutzer benutzer, List<Spiel> warenkorb) {
 		setTitle("Bibliothek");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer, warenkorb);
-		final JPanel view = new JPanel(new GridLayout(0, 5));
+		final JPanel view = new JPanel(new GridLayout(0, 4));
 		List<Spiel> liste = SpielController.getGameController().getKäufeByUser(benutzer.getId());
 		
 		for(Spiel spiel : liste) {
 			final JPanelWithBackground game = new JPanelWithBackground(iconToImage(loadIcon(spiel.getCover())));
 			
+			JButton download = new JButton("Download");
 			download.setOpaque(true);
-			game.add(download, new GridBagConstraints());
-
+			game.add(download, BorderLayout.SOUTH);
+			game.setSize(250,312);
 			
 			view.add(game);
 			download.setVisible(false);
@@ -56,6 +58,14 @@ public class BibliothekView extends viewSuperclass {
 					repaint();
 				}
 
+			});
+			
+			download.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+				}
 			});
 			
 			download.addMouseListener(new MouseAdapter() {

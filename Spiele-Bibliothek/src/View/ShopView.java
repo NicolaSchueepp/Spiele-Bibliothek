@@ -33,13 +33,23 @@ public class ShopView extends viewSuperclass {
 	List<Spiel> spiele;
 	final JComboBox<String> genreBox;
 
-	public ShopView(Benutzer benutzer, List<Spiel> warenkorb) {
+	public ShopView(Benutzer benutzer, List<Spiel> warenkorb, String sucheName) {
 		warenkorbtmp = warenkorb;
 		setTitle("Genre");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer, warenkorb);
 		genreBox = new JComboBox<String>(SpielController.getGameController().getAllGenres());
 		genreBox.insertItemAt("Alle Spiele", 0);
+		genreBox.insertItemAt("", 0);
+		if(sucheName == null) {
+			genreBox.setSelectedItem("Alle Spiele");
+		}else {
+			genreBox.setSelectedItem("");
+			centerGamesPanel.removeAll();
+			spiele = SpielController.getGameController().getGamesByName(sucheName);
+			addGames(benutzer, spiele);
+			scrollPane.revalidate();
+		}
 		genreBox.addActionListener(new ActionListener() {
 
 			@Override
@@ -49,7 +59,7 @@ public class ShopView extends viewSuperclass {
 					spiele = SpielController.getGameController().searchAllGames();
 					addGames(benutzer, spiele);
 					scrollPane.revalidate();
-				} else {
+				} else if(!genreBox.getSelectedItem().equals("")){
 					centerGamesPanel.removeAll();
 					spiele = SpielController.getGameController()
 							.searchGamesByGenre((String)genreBox.getSelectedItem());
@@ -69,7 +79,6 @@ public class ShopView extends viewSuperclass {
 	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setBorder(null);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(20);
-		genreBox.setSelectedItem("Alle Spiele");
 
 		centerSouthPanel.add(centerGamesPanel, BorderLayout.CENTER);
 

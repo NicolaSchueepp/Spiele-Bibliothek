@@ -101,7 +101,7 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ShopView shopView = new ShopView(benutzer, warenkorb);
+				ShopView shopView = new ShopView(benutzer, warenkorb, searchField.getText());
 				shopView.setSize(1500, 900);
 				shopView.setResizable(false);
 				shopView.setVisible(true);
@@ -175,7 +175,7 @@ public class viewSuperclass extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ShopView shopView = new ShopView(benutzer, warenkorb);
+				ShopView shopView = new ShopView(benutzer, warenkorb, null);
 				shopView.setSize(1500, 900);
 				shopView.setResizable(false);
 				shopView.setVisible(true);

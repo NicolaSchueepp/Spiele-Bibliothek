@@ -27,4 +27,6 @@ public interface SpielBewertungDao {
 	public abstract List<Spiel> getSpielByID(int userid);
 
 	public abstract List<Spiel> getKäufeByUser(int userid);
+	
+	public abstract List<Spiel> getGamesByName(String gamename);
 }

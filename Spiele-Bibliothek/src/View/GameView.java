@@ -40,22 +40,24 @@ public class GameView extends viewSuperclass {
 		setTitle("Game");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer, warenkorb);
-
+		JPanel leftTopOverPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel leftPanel = new JPanel(new GridLayout(2, 1,0,0));
 		leftPanel.setAlignmentX(CENTER_ALIGNMENT);
 		JPanel leftTopPanel = new JPanel();
 		leftTopPanel.setLayout(new BoxLayout(leftTopPanel,BoxLayout.Y_AXIS));
+		leftTopPanel.setAlignmentX(CENTER_ALIGNMENT);
 		gameName.setText(spiel.getBezeichnung());
 		gameName.setFont(new Font("Open Sans", 0, 30));
 		leftTopPanel.add(gameName, FlowLayout.LEFT);
 		gameIcon.setIcon(loadIcon(spiel.getCover()));
 		leftTopPanel.add(gameIcon);
 		
-		JPanel leftBottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel leftBottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		///////////
 		JLabel video = new JLabel("Video");
 		leftBottomPanel.add(video);
 		
-		leftPanel.add(leftTopPanel);
+		leftPanel.add(leftTopOverPanel);
 		leftPanel.add(leftBottomPanel);
 
 		JPanel rightPanel = new JPanel(new GridLayout(2, 1, 0,0));
@@ -145,7 +147,7 @@ public class GameView extends viewSuperclass {
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							ShopView warenkorbView = new ShopView(benutzer, warenkorb);
+							ShopView warenkorbView = new ShopView(benutzer, warenkorb, null);
 							warenkorbView.setSize(1500, 900);
 							warenkorbView.setResizable(false);
 							warenkorbView.setVisible(true);
