@@ -38,7 +38,7 @@ foreign key(Game_ID) references Game(ID),
 foreign key(Benutzer_ID) references Benutzer(ID)
 );
 
-LOAD DATA LOCAL INFILE 'D:\\Game.csv'
+LOAD DATA LOCAL INFILE 'Game.csv'
 INTO TABLE game
 CHARACTER SET utf8
 FIELDS TERMINATED BY ';'
