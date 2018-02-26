@@ -7,8 +7,15 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 
+import javax.media.CannotRealizeException;
+import javax.print.attribute.standard.Media;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,10 +30,13 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
 
+import com.sun.media.MediaPlayer;
+
 import Controller.SpielController;
 import model.Benutzer;
 import model.Bewertung;
 import model.Spiel;
+import model.mediaPlayer;
 
 public class GameView extends viewSuperclass {
 
@@ -40,7 +50,6 @@ public class GameView extends viewSuperclass {
 		setTitle("Game");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer, warenkorb);
-		JPanel leftTopOverPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel leftPanel = new JPanel(new GridLayout(2, 1,0,0));
 		leftPanel.setAlignmentX(CENTER_ALIGNMENT);
 		JPanel leftTopPanel = new JPanel();
@@ -53,11 +62,12 @@ public class GameView extends viewSuperclass {
 		leftTopPanel.add(gameIcon);
 		
 		JPanel leftBottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		///////////
-		JLabel video = new JLabel("Video");
-		leftBottomPanel.add(video);
+		if(!spiel.getVideo().equals("")) {
+			
+		}
 		
-		leftPanel.add(leftTopOverPanel);
+		
+		leftPanel.add(leftTopPanel);
 		leftPanel.add(leftBottomPanel);
 
 		JPanel rightPanel = new JPanel(new GridLayout(2, 1, 0,0));

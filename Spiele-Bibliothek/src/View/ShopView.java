@@ -48,7 +48,6 @@ public class ShopView extends viewSuperclass {
 			centerGamesPanel.removeAll();
 			spiele = SpielController.getGameController().getGamesByName(sucheName);
 			addGames(benutzer, spiele);
-			scrollPane.revalidate();
 		}
 		genreBox.addActionListener(new ActionListener() {
 
