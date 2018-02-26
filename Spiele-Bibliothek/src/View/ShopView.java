@@ -41,15 +41,14 @@ public class ShopView extends viewSuperclass {
 		genreBox = new JComboBox<String>(SpielController.getGameController().getAllGenres());
 		genreBox.insertItemAt("Alle Spiele", 0);
 		genreBox.insertItemAt("", genreBox.getItemCount());
-		if(sucheName == null) {
-			genreBox.setSelectedItem("Alle Spiele");
-			revalidate();
-		}else {
+
+		if(sucheName != null) {
 			genreBox.setSelectedItem("");
 			centerGamesPanel.removeAll();
 			spiele = SpielController.getGameController().getGamesByName(sucheName);
 			addGames(benutzer, spiele);
 		}
+
 		genreBox.addActionListener(new ActionListener() {
 
 			@Override

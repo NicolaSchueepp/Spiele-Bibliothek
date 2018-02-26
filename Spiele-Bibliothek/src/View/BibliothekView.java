@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream.GetField;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -31,10 +33,8 @@ import model.Spiel;
 public class BibliothekView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
-	FileDialog d = new FileDialog(this , "Speichern", FileDialog.LOAD);
 
 	public BibliothekView(Benutzer benutzer, List<Spiel> warenkorb) {
-		d.setVisible(false);
 		setTitle("Bibliothek");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer, warenkorb);
@@ -72,10 +72,18 @@ public class BibliothekView extends viewSuperclass {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					d.setVisible(true);
-					File file = new File(d.getDirectory());
-					file 
+					FileWriter writer;
+					File datei = new File(spiel.getBezeichnung()+".txt");
 					
+					try {
+						writer = new FileWriter(datei);
+						writer.write("Viel Spass mit dem Spiel"+spiel.getBezeichnung());
+						
+						writer.flush();
+						writer.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 			
