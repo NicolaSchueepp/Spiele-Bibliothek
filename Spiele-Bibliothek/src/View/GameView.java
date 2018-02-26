@@ -1,22 +1,13 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
-import javax.media.CannotRealizeException;
-import javax.print.attribute.standard.Media;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,16 +18,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
-import javax.swing.plaf.BorderUIResource;
-
-import com.sun.media.MediaPlayer;
 
 import Controller.SpielController;
 import model.Benutzer;
 import model.Bewertung;
 import model.Spiel;
-import model.mediaPlayer;
+
 
 public class GameView extends viewSuperclass {
 
@@ -149,7 +136,7 @@ public class GameView extends viewSuperclass {
 					JDialog fenster = new JDialog();
 					fenster.setSize(1000, 1000);
 					
-					JLabel text = new JLabel("Spiel zum Warenkorb hinzugefügt...Möchten Sie weiter einkaufen?");
+					JLabel text = new JLabel("Spiel zum Warenkorb hinzugefï¿½gt...Mï¿½chten Sie weiter einkaufen?");
 					JButton weiterEinkaufen = new JButton("Weiter einkaufen");
 					JButton zumWarenkorb = new JButton("Zum Warenkorb");
 					
@@ -238,7 +225,7 @@ public class GameView extends viewSuperclass {
 					fenster.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 40));
 					fenster.setSize(1000, 1000);
 					
-					JLabel text = new JLabel("Bewertung gesendet. Danke für die Bewertung!");
+					JLabel text = new JLabel("Bewertung gesendet. Danke fï¿½r die Bewertung!");
 					JButton schliessen = new JButton("Schliessen");
 					schliessen.addActionListener(new ActionListener() {
 						
