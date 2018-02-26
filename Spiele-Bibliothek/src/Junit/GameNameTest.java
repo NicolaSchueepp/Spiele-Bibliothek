@@ -7,26 +7,26 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import model.Benutzer;
+import model.Spiel;
 
-public class BenutzerTest {
-	private static Benutzer a;
-	
+public class GameNameTest {
+	private static Spiel a;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		BenutzerTest.a = new Benutzer();
+		GameNameTest.a = new Spiel();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BenutzerTest.a = null;
+		GameNameTest.a = null;
 	}
 
 	@Test
-	public void testFindUserByName() {
-		final String name = "abcd";
-		a.setBenutzername(name);
-		Assert.assertEquals("abcd",name);
+	public void test() {
+		final String gameName = "testGameName";
+		a.setBezeichnung(gameName);
+		Assert.assertEquals(gameName, a.getBezeichnung());
 	}
 
 }
