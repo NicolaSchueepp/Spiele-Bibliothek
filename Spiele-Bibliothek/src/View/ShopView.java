@@ -43,6 +43,7 @@ public class ShopView extends viewSuperclass {
 		genreBox.insertItemAt("", genreBox.getItemCount());
 		if(sucheName == null) {
 			genreBox.setSelectedItem("Alle Spiele");
+			revalidate();
 		}else {
 			genreBox.setSelectedItem("");
 			centerGamesPanel.removeAll();
@@ -68,7 +69,7 @@ public class ShopView extends viewSuperclass {
 			}
 		});
 		
-		//Filter werden dem North Panel hinzugefügt
+		//Filter werden dem North Panel hinzugefï¿½gt
 		northFilteringPanel.add(genreBox);
 		getNorthPanel().add(northFilteringPanel);
 		

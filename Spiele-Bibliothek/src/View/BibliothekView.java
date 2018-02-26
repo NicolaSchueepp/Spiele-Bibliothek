@@ -2,6 +2,7 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
+import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,6 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -25,8 +31,10 @@ import model.Spiel;
 public class BibliothekView extends viewSuperclass {
 
 	private static final long serialVersionUID = 1L;
+	FileDialog d = new FileDialog(this , "Speichern", FileDialog.LOAD);
 
 	public BibliothekView(Benutzer benutzer, List<Spiel> warenkorb) {
+		d.setVisible(false);
 		setTitle("Bibliothek");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer, warenkorb);
@@ -64,6 +72,9 @@ public class BibliothekView extends viewSuperclass {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					d.setVisible(true);
+					File file = new File(d.getDirectory());
+					file 
 					
 				}
 			});
@@ -92,10 +103,4 @@ public class BibliothekView extends viewSuperclass {
 		add(scrollPane, BorderLayout.CENTER);
 
 	}
-	// @Override
-	// protected void paintComponent(Graphics g) {
-	//
-	// super.paintComponent(g);
-	// g.drawImage(bgImage, 0, 0, null);
-	// }
 }

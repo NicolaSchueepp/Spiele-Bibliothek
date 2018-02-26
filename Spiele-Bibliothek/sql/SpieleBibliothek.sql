@@ -52,12 +52,3 @@ Values('Admin', '1234', 'admin@help.bbcag');
 insert into bewertung
 (Game_ID, Benutzer_ID, Bewertung)
 Values(22,23,5);
-
-
-Explain benutzer;
-
-Select * from Game;
-Select * from benutzer;
-Select * from bewertung;
-
-Select id, bezeichnung, hersteller, preis, erscheinungsjahr, genre, beschreibung, cover from (select AVG(Bewertung) as bewertung, Game.ID as id, Game.Bezeichnung as bezeichnung, Game.Hersteller as hersteller, Game.Preis as preis, Game.Erscheinungsjahr as erscheinungsjahr, Game.Genre as genre, Game.Beschreibung as beschreibung, Game.Cover as cover  from bewertung  join Game on Bewertung.Game_ID=Game.ID  group BY Game_ID order by bewertung DESC LIMIT 4)T;

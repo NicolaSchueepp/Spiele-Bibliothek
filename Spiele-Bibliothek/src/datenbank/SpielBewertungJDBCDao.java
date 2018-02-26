@@ -405,7 +405,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 		
 		try {
 			ps = con.prepareStatement(SQL);
-			ps.setString(1, gamename+"%");
+			ps.setString(1, "%"+gamename+"%");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
