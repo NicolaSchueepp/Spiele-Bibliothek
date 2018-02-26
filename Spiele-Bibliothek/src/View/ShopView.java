@@ -40,7 +40,7 @@ public class ShopView extends viewSuperclass {
 		addMainMenu(benutzer, warenkorb);
 		genreBox = new JComboBox<String>(SpielController.getGameController().getAllGenres());
 		genreBox.insertItemAt("Alle Spiele", 0);
-		genreBox.insertItemAt("", 0);
+		genreBox.insertItemAt("", genreBox.getItemCount());
 		if(sucheName == null) {
 			genreBox.setSelectedItem("Alle Spiele");
 		}else {

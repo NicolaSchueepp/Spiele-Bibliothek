@@ -20,13 +20,13 @@ public interface SpielBewertungDao {
 
 	public abstract List<Bewertung> getAllBewertungenbyID(int spielID);
 	
-	public abstract List<spieleliste> getAlleKäufe();
+	public abstract List<spieleliste> getAlleKÃ¤ufe();
 	
 	public abstract void addKauf(spieleliste spieleliste);
 	
 	public abstract List<Spiel> getSpielByID(int userid);
 
-	public abstract List<Spiel> getKäufeByUser(int userid);
+	public abstract List<Spiel> getKÃ¤ufeByUser(int userid);
 	
 	public abstract List<Spiel> getGamesByName(String gamename);
 }

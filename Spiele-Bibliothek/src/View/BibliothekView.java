@@ -31,7 +31,7 @@ public class BibliothekView extends viewSuperclass {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMainMenu(benutzer, warenkorb);
 		final JPanel view = new JPanel(new GridLayout(0, 4));
-		List<Spiel> liste = SpielController.getGameController().getKäufeByUser(benutzer.getId());
+		List<Spiel> liste = SpielController.getGameController().getKÃ¤ufeByUser(benutzer.getId());
 		
 		for(Spiel spiel : liste) {
 			final JPanelWithBackground game = new JPanelWithBackground(iconToImage(loadIcon(spiel.getCover())));

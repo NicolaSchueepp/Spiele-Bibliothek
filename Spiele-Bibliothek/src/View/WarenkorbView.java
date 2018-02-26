@@ -64,7 +64,7 @@ public class WarenkorbView extends viewSuperclass {
 			@SuppressWarnings("unlikely-arg-type")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				List<spieleliste> spielelisteList = SpielController.getGameController().getAlleKäufe();
+				List<spieleliste> spielelisteList = SpielController.getGameController().getAlleKÃ¤ufe();
 				
 				for(Spiel spiel : warenkorb) {
 					weiterfahren = false;
@@ -104,7 +104,7 @@ public class WarenkorbView extends viewSuperclass {
 						fenster.setLayout(new GridLayout(2, 1,100,0));
 						fenster.setSize(1000, 1000);
 						
-						JLabel text = new JLabel("Spiel zur Bibliothek hinzugefügt");
+						JLabel text = new JLabel("Spiel zur Bibliothek hinzugefï¿½gt");
 						JButton schliessen = new JButton("Schliessen");
 						schliessen.addActionListener(new ActionListener() {
 							

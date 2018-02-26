@@ -45,16 +45,16 @@ public class SpielController {
 		SPIELBEWERTUNG_DAO.addBewertung(benutzer, game, bewertung);
 	}
 	
-	public List<spieleliste> getAlleKäufe() {
-		return SPIELBEWERTUNG_DAO.getAlleKäufe();
+	public List<spieleliste> getAlleKÃ¤ufe() {
+		return SPIELBEWERTUNG_DAO.getAlleKÃ¤ufe();
 	}
 	
 	public void addKauf(spieleliste spieleliste) {
 		SPIELBEWERTUNG_DAO.addKauf(spieleliste);
 	}
 	
-	public List<Spiel> getKäufeByUser(int id) {
-		return SPIELBEWERTUNG_DAO.getKäufeByUser(id);
+	public List<Spiel> getKÃ¤ufeByUser(int id) {
+		return SPIELBEWERTUNG_DAO.getKÃ¤ufeByUser(id);
 	}
 	
 	public List<Spiel> getGamesByName(String gamename){

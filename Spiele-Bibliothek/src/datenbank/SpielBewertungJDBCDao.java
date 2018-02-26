@@ -255,7 +255,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 	}
 
 	@Override
-	public List<spieleliste> getAlleKäufe() {
+	public List<spieleliste> getAlleKÃ¤ufe() {
 		final String SQL = "select * from spieleliste";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -316,7 +316,7 @@ public class SpielBewertungJDBCDao implements SpielBewertungDao {
 	}
 
 	@Override
-	public List<Spiel> getKäufeByUser(int userid) {
+	public List<Spiel> getKÃ¤ufeByUser(int userid) {
 		final String SQL = "select Distinct(Game_ID) from spieleliste where Benutzer_ID = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;

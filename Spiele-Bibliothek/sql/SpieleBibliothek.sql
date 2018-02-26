@@ -43,7 +43,7 @@ INTO TABLE game
 CHARACTER SET utf8
 FIELDS TERMINATED BY ';'
 LINES TERMINATED BY '\r\n'
-IGNORE 1 ROWS (Bezeichnung, Hersteller, Preis, Erscheinungsjahr, Genre, Beschreibung, Cover);
+IGNORE 1 ROWS (Bezeichnung, Hersteller, Preis, Erscheinungsjahr, Genre, Beschreibung, Cover, Video);
 
 insert into benutzer
 (Benutzername, Passwort, Email)
